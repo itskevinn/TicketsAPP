@@ -1,0 +1,14 @@
+<h3><b>Inciar sesión</b></h3>
+<form [formGroup]="loginForm" class="px-5">
+  <div class="row my-1">
+    <input class="my-1" type="text" pInputText placeholder="Usuario"
+           formControlName="username">
+  </div>
+  <div class="row">
+    <input class="my-1" type="password" pInputText placeholder="Contraseña"
+           formControlName="password">
+  </div>
+</form>
+<div class="col-12 d-flex justify-content-center">
+  <p-button class="mx-1 my-3" (click)="login()" label="Iniciar sesión" icon="pi pi-check" iconPos="right"></p-button>
+</div>
