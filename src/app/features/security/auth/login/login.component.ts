@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../../../../data/services/security/auth.service";
 import {Subscription} from "rxjs";
-import {markFormControlsAsTouched, unsubscribeAllSubscriptions} from "../../../../shared/func/functions";
+import {markFormControlsAsDirty, unsubscribeAllSubscriptions} from "../../../../shared/func/functions";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
+import {AuthService} from "../../../../data/services/security/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) {
     this.loginForm = this.buildForm();
     if (this.authService.currentUserValue) {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home']).then(_ => console.trace());
     }
 
   }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   public login(): void {
     if (this.loginForm.invalid) {
-      markFormControlsAsTouched(this.loginForm);
+      markFormControlsAsDirty(this.loginForm);
       return;
     }
     let subscription = this.authService

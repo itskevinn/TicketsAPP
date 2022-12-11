@@ -23,9 +23,9 @@ export function setFormValues<T>(form: FormGroup, data: any): void {
  *
  * @param form - Formulario a tocar campos
  * */
-export function markFormControlsAsTouched(form: FormGroup): void {
+export function markFormControlsAsDirty(form: FormGroup): void {
   const controls = form.controls;
-  Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
+  Object.keys(controls).forEach(controlName => controls[controlName].markAsDirty());
 }
 
 /**

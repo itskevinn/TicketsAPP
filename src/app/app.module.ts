@@ -14,23 +14,23 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CustomHttpInterceptor} from "./core/interceptor/custom-http.interceptor";
 import {SpinnerService} from "./core/service/spinner.service";
 import {AuthModule} from "./features/security/auth/auth.module";
+import {LayoutModule} from "./layout/layout.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    AuthLayoutComponent,
-    ContentLayoutComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        SharedModule,
-        BrowserAnimationsModule,
-        CoreModule,
-        ToastModule,
-        HttpClientModule,
-        AuthModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    ToastModule,
+    HttpClientModule,
+    AuthModule,
+    LayoutModule
+  ],
   providers: [MessageService,
     {
       provide: HTTP_INTERCEPTORS,

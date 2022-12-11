@@ -49,7 +49,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
               severity: 'error',
               detail: "Usuario y/o contraseña incorrectos"
             });
-            this.router.navigateByUrl('/login');
+            this.router.navigateByUrl('/login').then(_ => console.trace());
           }
           if (err.status >= 400 && err.status < 404 || err.status >= 405 || err.statusText == 'INTERNAL_SERVER_ERROR') {
             if (err.error && err.error.message) {

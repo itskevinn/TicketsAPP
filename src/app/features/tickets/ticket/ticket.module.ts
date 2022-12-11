@@ -1,13 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { TicketRoutingModule } from './ticket-routing.module';
+import { TicketsInfoComponent } from './tickets-info/tickets-info.component';
+import { CreateModifyTicketComponent } from './create-modify-ticket/create-modify-ticket.component';
+import {SharedModule} from "../../../shared/shared.module";
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    TicketsInfoComponent,
+    CreateModifyTicketComponent
+  ],
   imports: [
-    CommonModule,
+    SharedModule,
     TicketRoutingModule
   ]
 })

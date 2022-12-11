@@ -21,8 +21,12 @@ const routes: Routes = [
           import('./features/home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'tickes',
+        path: 'tickets',
         loadChildren: () => import('./features/tickets/ticket/ticket.module').then(m => m.TicketModule)
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./features/security/user/user.module').then(m => m.UserModule)
       }
     ]
   },

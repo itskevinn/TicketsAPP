@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/"><strong>Home</strong></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar"
+            aria-controls="navbar" aria-expanded="false"
+            aria-label="Toggle bar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li *ngFor="let menuItem of menuItems" class="nav-item">
+          <a class="nav-link active" aria-current="page" [routerLink]="menuItem.routerLink">{{menuItem.label}}</a>
+        </li>
+      </ul>
+      <div class="d-flex">
+        <app-logout></app-logout>
+      </div>
+    </div>
+  </div>
+</nav>
