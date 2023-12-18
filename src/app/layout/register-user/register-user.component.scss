@@ -6,3 +6,19 @@
     background-color: rgb(142, 197, 79); /* Cambia el color de fondo a tu elección */
     color: #ffffff; /* Cambia el color del texto a tu elección */
 }
+.divider:after, .divider:before {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #b1aaaa;
+}
+.img-fluid {
+    height: auto;
+    width: auto;
+}
+// .si::before{
+//     content: "Fecha de nacimiento";
+//     position: absolute;
+//       color: #888;
+//       pointer-events: none;
+// }

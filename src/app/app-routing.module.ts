@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ContentLayoutComponent} from "./layout/content-layout/content-layout.component";
 import {AuthGuard} from "./core/guards/auth.guard";
 import {AuthLayoutComponent} from "./layout/auth-layout/auth-layout.component";
+import { RegisterUserComponent } from './layout/register-user/register-user.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: ContentLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
@@ -29,6 +30,10 @@ const routes: Routes = [
         loadChildren: () => import('./features/security/user/user.module').then(m => m.UserModule)
       }
     ]
+  },
+  {
+    path: 'register',
+    component: RegisterUserComponent,
   },
   {
     path: 'auth',
