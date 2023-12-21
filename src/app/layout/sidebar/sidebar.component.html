@@ -1,3 +1,16 @@
-
-<router-outlet></router-outlet>
-<p-panelMenu [model]="items" [style]="{'width':'200px'}"></p-panelMenu>
+<div style="display: flex; height: 100vh;">
+    <div class="" style="width: 250px;">
+      <p-panelMenu [model]="items"></p-panelMenu>
+    </div>
+  
+    <div style="flex: 1; display: flex; flex-direction: column;">
+      <div class="">
+        <p-breadcrumb [model]="items"></p-breadcrumb>
+      </div>
+  
+      <div style="flex: 1;">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  
