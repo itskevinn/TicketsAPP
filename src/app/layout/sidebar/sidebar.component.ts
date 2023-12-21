@@ -8,41 +8,38 @@ import { MenuItem } from 'primeng/api';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
+    itemsBread: MenuItem[] = [];
+    home: MenuItem | undefined;
   constructor() {
   }
   items: MenuItem[] = [];
 
     ngOnInit() {
+        this.itemsBread = [{ label: 'Computer' }, { label: 'Notebook' }, { label: 'Accessories' }, { label: 'Backpacks' }, { label: 'Item' }];
+
+        this.home = { icon: 'pi pi-home', routerLink: '/' };
         this.items = [
             {
-                label: 'File',
+                label: 'Proyectos',
                 icon: 'pi pi-fw pi-file',
                 items: [
                     {
-                        label: 'New',
+                        label: 'Nuevo',
                         icon: 'pi pi-fw pi-plus',
+                    },
+                    {
+                        label: 'Recientes',
+                        icon: 'pi pi-fw pi-users',
                         items: [
                             {
-                                label: 'Bookmark',
-                                icon: 'pi pi-fw pi-bookmark'
+                                label: 'Filter',
+                                icon: 'pi pi-fw pi-filter'
                             },
                             {
-                                label: 'Video',
-                                icon: 'pi pi-fw pi-video',
+                                icon: 'pi pi-fw pi-bars',
+                                label: 'List'
                             }
                         ]
-                    },
-                    {
-                        label: 'Delete',
-                        icon: 'pi pi-fw pi-trash'
-                    },
-                    { 
-                        separator: true 
-                    },
-                    {
-                        label: 'Export',
-                        icon: 'pi pi-fw pi-external-link'
                     }
                 ]
             },
@@ -65,40 +62,6 @@ export class SidebarComponent implements OnInit {
                     {
                         label: 'Justify',
                         icon: 'pi pi-fw pi-align-justify'
-                    }
-                ]
-            },
-            {
-                label: 'Users',
-                icon: 'pi pi-fw pi-user',
-                items: [
-                    {
-                        label: 'New',
-                        icon: 'pi pi-fw pi-user-plus'
-                    },
-                    {
-                        label: 'Delete',
-                        icon: 'pi pi-fw pi-user-minus'
-                    },
-                    {
-                        label: 'Search',
-                        icon: 'pi pi-fw pi-users',
-                        items: [
-                            {
-                                label: 'Filter',
-                                icon: 'pi pi-fw pi-filter',
-                                items: [
-                                    {
-                                        label: 'Print',
-                                        icon: 'pi pi-fw pi-print'
-                                    }
-                                ]
-                            },
-                            {
-                                icon: 'pi pi-fw pi-bars',
-                                label: 'List'
-                            }
-                        ]
                     }
                 ]
             },
@@ -131,7 +94,27 @@ export class SidebarComponent implements OnInit {
                         ]
                     }
                 ]
-            }
+            },
+            {
+                label: 'Cuenta',
+                icon: 'pi pi-fw pi-user',
+                items: [
+                    {
+                        label: 'Perfil',
+                        icon: 'pi pi-fw pi-user'
+                    },
+                    {
+                        label: 'Search',
+                        icon: 'pi pi-fw pi-users',
+                        items: [
+                            {
+                                icon: 'pi pi-fw pi-bars',
+                                label: 'List'
+                            }
+                        ]
+                    }
+                ]
+            },
         ];
     }
 

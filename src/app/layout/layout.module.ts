@@ -7,7 +7,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { RegisterUserComponent } from './register-user/register-user.component';
 import {AuthModule} from "../features/security/auth/auth.module";
 import { PanelMenuModule } from 'primeng/panelmenu';
-
+import { BreadcrumbModule } from 'primeng/breadcrumb';
 @NgModule({
     declarations: [ContentLayoutComponent,
         AuthLayoutComponent,
@@ -24,7 +24,8 @@ import { PanelMenuModule } from 'primeng/panelmenu';
   imports: [
     SharedModule,
     AuthModule,
-    PanelMenuModule
+    PanelMenuModule,
+    BreadcrumbModule
   ]
 })
 export class LayoutModule {
