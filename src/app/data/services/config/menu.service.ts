@@ -14,7 +14,7 @@ export class MenuService extends BaseService{
   }
 
   public getAll(): Observable<Response<MenuItem[]>> {
-    return this.http.get<Response<MenuItem[]>>(`${this.baseUrl}/MenuItem/GetAll`)
+    return this.http.get<Response<MenuItem[]>>(`${this.securityBaseUrl}/MenuItem/GetAll`)
       .pipe(catchError(err => {
         throw err;
       }))

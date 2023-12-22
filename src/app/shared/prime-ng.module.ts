@@ -8,31 +8,34 @@ import {DropdownModule} from 'primeng/dropdown';
 import {ProgressSpinnerModule} from 'primeng/progressspinner'
 import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
+import {RadioButtonModule } from "primeng/radiobutton";
 
 @NgModule({
-  declarations: [],
-  imports: [
-    TableModule,
-    TabMenuModule,
-    ButtonModule,
-    InputTextModule,
-    DropdownModule,
-    RippleModule,
-    ProgressSpinnerModule,
-    InputNumberModule,
-    CalendarModule
-  ],
-  exports: [
-    TableModule,
-    TabMenuModule,
-    ButtonModule,
-    InputTextModule,
-    DropdownModule,
-    RippleModule,
-    ProgressSpinnerModule,
-    InputNumberModule,
-    CalendarModule
-  ]
+    declarations: [],
+    imports: [
+        TableModule,
+        TabMenuModule,
+        ButtonModule,
+        InputTextModule,
+        DropdownModule,
+        RippleModule,
+        ProgressSpinnerModule,
+        InputNumberModule,
+        CalendarModule,
+        RadioButtonModule
+    ],
+    exports: [
+        TableModule,
+        TabMenuModule,
+        ButtonModule,
+        InputTextModule,
+        DropdownModule,
+        RippleModule,
+        ProgressSpinnerModule,
+        InputNumberModule,
+        CalendarModule,
+        RadioButtonModule
+    ]
 })
 export class PrimeNgModule {
 }

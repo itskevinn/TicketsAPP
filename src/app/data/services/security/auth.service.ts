@@ -20,7 +20,7 @@ export class AuthService extends BaseService {
   }
 
   public login(username: string, password: string): Observable<Response<any>> {
-    return this.http.post<any>(`${this.baseUrl}/User/Authenticate`, {username, password})
+    return this.http.post<any>(`${this.securityBaseUrl}/Auth/Authenticate`, {username, password})
       .pipe(map(user => {
         this.router.navigate(["/home"]).then(_ => console.trace());
         sessionStorage.setItem('currentSession', JSON.stringify(user.data));

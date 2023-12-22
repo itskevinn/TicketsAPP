@@ -1,0 +1,15 @@
+@import "assets/layout/styles/layout/layout";
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.card, .p-inputtext {
+    border-radius: 20px !important;
+}
+

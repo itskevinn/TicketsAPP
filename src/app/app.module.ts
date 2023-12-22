@@ -15,6 +15,7 @@ import {CustomHttpInterceptor} from "./core/interceptor/custom-http.interceptor"
 import {SpinnerService} from "./core/service/spinner.service";
 import {AuthModule} from "./features/security/auth/auth.module";
 import {LayoutModule} from "./layout/layout.module";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import {LayoutModule} from "./layout/layout.module";
     ToastModule,
     HttpClientModule,
     AuthModule,
-    LayoutModule
+    LayoutModule,
+    FontAwesomeModule
   ],
   providers: [MessageService,
     {

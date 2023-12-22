@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
-import {markFormControlsAsDirty, unsubscribeAllSubscriptions} from "../../../../shared/func/functions";
+import {markFormControlsAsDirty, unsubscribeAllSubscriptions} from "../../../../shared/functions/functions";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../data/services/security/auth.service";
