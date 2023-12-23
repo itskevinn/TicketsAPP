@@ -9,6 +9,7 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner'
 import {InputNumberModule} from "primeng/inputnumber";
 import {CalendarModule} from "primeng/calendar";
 import {RadioButtonModule } from "primeng/radiobutton";
+import {ToastModule} from "primeng/toast";
 
 @NgModule({
     declarations: [],
@@ -22,7 +23,8 @@ import {RadioButtonModule } from "primeng/radiobutton";
         ProgressSpinnerModule,
         InputNumberModule,
         CalendarModule,
-        RadioButtonModule
+        RadioButtonModule,
+        ToastModule
     ],
     exports: [
         TableModule,
@@ -34,7 +36,8 @@ import {RadioButtonModule } from "primeng/radiobutton";
         ProgressSpinnerModule,
         InputNumberModule,
         CalendarModule,
-        RadioButtonModule
+        RadioButtonModule,
+        ToastModule
     ]
 })
 export class PrimeNgModule {

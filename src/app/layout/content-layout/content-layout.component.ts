@@ -7,9 +7,9 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
 
 @Component({
     selector: 'app-layout',
-    templateUrl: './app.layout.component.html'
+    templateUrl: './content-layout.component.html'
 })
-export class AppLayoutComponent implements OnDestroy {
+export class ContentLayoutComponent implements OnDestroy {
 
     overlayMenuOpenSubscription: Subscription;
 

@@ -12,7 +12,7 @@ export class MenuComponent implements OnInit {
 
     model: any[] = [];
 
-    constructor(public layoutService: LayoutService, public authService: AuthService) {
+    constructor(public authService: AuthService) {
     }
 
     ngOnInit() {
