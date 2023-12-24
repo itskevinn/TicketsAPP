@@ -2,9 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ContentLayoutComponent} from "./layout/content-layout/content-layout.component";
 import {AuthGuard} from "./core/guards/auth.guard";
-import {AuthLayoutComponent} from "./layout/auth-layout/auth-layout.component";
-import {RegisterUserComponent} from "./features/security/user/register-user/register-user.component";
-
 
 const routes: Routes = [
   {
@@ -15,7 +12,7 @@ const routes: Routes = [
   {
     path: '',
     component: ContentLayoutComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'home',
@@ -23,7 +20,7 @@ const routes: Routes = [
           import('./features/home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'tickets',
+        path: 'projects',
         loadChildren: () => import('./features/tickets/ticket/ticket.module').then(m => m.TicketModule)
       },
       {
@@ -33,12 +30,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'register',
-    component: RegisterUserComponent,
-  },
-  {
     path: 'auth',
-    component: AuthLayoutComponent,
     loadChildren: () =>
       import('./features/security/auth/auth.module').then(m => m.AuthModule)
   },
