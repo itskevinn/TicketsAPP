@@ -34,3 +34,9 @@
       }
     }
   }
+  .board {
+    display: flex;
+    height: 70vh;
+    overflow-x: auto;
+    padding: 0 1em;
+  }

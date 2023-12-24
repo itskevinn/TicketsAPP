@@ -4,7 +4,8 @@ import {SpinnerService} from "./service/spinner.service";
 import {SpinnerComponent} from "./components/spinner/spinner.component";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {MenuService} from "../data/services/config/menu.service";
-
+import { ApiService } from './service/api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,9 +14,10 @@ import {MenuService} from "../data/services/config/menu.service";
   imports: [
     CommonModule,
     ProgressSpinnerModule,
+    HttpClientModule
   ],
   exports:[SpinnerComponent],
-  providers: [SpinnerService,MenuService]
+  providers: [SpinnerService,MenuService, ApiService]
 })
 export class CoreModule {
 }

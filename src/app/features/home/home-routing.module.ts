@@ -1,13 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
+import {HomeComponent} from "./home/home.component"; 
 
-const routes: Routes = [{
+const routes: Routes = [
+  {
   path: '',
-  redirectTo: '',
-  pathMatch: 'full',
-  component: HomeComponent
-}];
+  redirectTo: 'home',  // Redirige a la ruta 'home'
+  pathMatch: 'full'
+  },
+  {
+    path: '',  // Agrega una ruta específica para 'home'
+    component: HomeComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
