@@ -23,7 +23,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         CoreModule,
         LayoutModule,
         HttpClientModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
     ],
     providers: [MessageService,
         {

@@ -1,9 +1,0 @@
-<div
-	class="list"
-	id="list_{{list.id}}"
->
-	<h3 class="list__title"><strong>{{list.name}}</strong></h3>
-	<div class="list__tasks">
-		<app-task *ngFor="let task of list.cards" [task]="task"></app-task>
-	</div>
-</div>
