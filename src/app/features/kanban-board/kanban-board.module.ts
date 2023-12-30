@@ -5,18 +5,22 @@ import {SharedModule} from "../../shared/shared.module";
 import {BoardComponent} from "./board/board.component";
 import {ListComponent} from "./list/list.component";
 import {CdkDrag, CdkDropList} from "@angular/cdk/drag-drop";
-import {TaskComponent} from "./task/task.component";
+import {TicketComponent} from "./task/ticket.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatButtonModule} from "@angular/material/button";
 
 
 @NgModule({
-    declarations: [BoardComponent, ListComponent, TaskComponent],
+    declarations: [BoardComponent, ListComponent, TicketComponent],
     exports: [BoardComponent, ListComponent],
     imports: [
         CommonModule,
         MaterialModule,
         SharedModule,
         CdkDropList,
-        CdkDrag
+        CdkDrag,
+        MatTooltipModule,
+        MatButtonModule
     ]
 })
 export class KanbanBoardModule {
