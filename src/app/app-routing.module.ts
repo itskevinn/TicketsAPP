@@ -3,8 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {ContentLayoutComponent} from "./layout/content-layout/content-layout.component";
 import {AuthGuard} from "./core/guards/auth.guard";
 import {AuthLayoutComponent} from "./layout/auth-layout/auth-layout.component";
-import {RegisterUserComponent} from "./features/security/user/register-user/register-user.component";
-
+import {RegisterUserComponent} from "./features/register/register/register-user.component";
 
 const routes: Routes = [
   {
@@ -29,12 +28,18 @@ const routes: Routes = [
       {
         path: 'users',
         loadChildren: () => import('./features/security/user/user.module').then(m => m.UserModule)
+      },
+      {
+        path: 'subjects',
+        loadChildren: () => import('./features/subject/subject.module').then(m => m.SubjectModule)
       }
     ]
   },
   {
     path: 'register',
     component: RegisterUserComponent,
+    loadChildren: () =>
+      import('./features/register/register.module').then(m => m.RegisterModule)
   },
   {
     path: 'auth',

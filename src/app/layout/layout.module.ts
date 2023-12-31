@@ -3,7 +3,6 @@ import {SharedModule} from "../shared/shared.module";
 import {ContentLayoutComponent} from './content-layout/content-layout.component';
 import {AuthLayoutComponent} from "./auth-layout/auth-layout.component";
 import {SidebarComponent} from './sidebar/sidebar.component';
-import {RegisterUserComponent} from '../features/security/user/register-user/register-user.component';
 import {AuthModule} from "../features/security/auth/auth.module";
 import {PanelMenuModule} from 'primeng/panelmenu';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
@@ -17,7 +16,6 @@ import {RouterModule} from "@angular/router";
 @NgModule({
     declarations: [ContentLayoutComponent,
         AuthLayoutComponent,
-        RegisterUserComponent,
         TopBarComponent,
         MenuComponent,
         MenuitemComponent,
@@ -25,12 +23,10 @@ import {RouterModule} from "@angular/router";
         FooterComponent,
     ],
     exports: [
-        RegisterUserComponent,
         PanelMenuModule,
         SidebarComponent,
         ContentLayoutComponent,
         AuthLayoutComponent,
-        RegisterUserComponent,
         TopBarComponent,
         MenuComponent,
         MenuitemComponent,
@@ -42,7 +38,7 @@ import {RouterModule} from "@angular/router";
         AuthModule,
         RouterModule,
         PanelMenuModule,
-        BreadcrumbModule
+        BreadcrumbModule,
     ],
     providers: [LayoutService]
 })
