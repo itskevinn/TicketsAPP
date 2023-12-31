@@ -1,0 +1,16 @@
+<div class="task mx-2" id="task_{{ticket.id}}"
+     [ngStyle]="{'border-left': priorityStyle}">
+    <div class="task__icon">
+        <i>{{ticket.priority.icon}}</i>
+    </div>
+    <h3 class="task__title">Tarea</h3>
+    <button matTooltip="Editar tarea" matTooltipClass="custom-tooltip-blue" matTooltipPosition="above" mat-icon-button
+            (click)="handleEditTicket(ticket)">
+        <mat-icon aria-label="icon-button to edit">edit</mat-icon>
+    </button>
+    <button matTooltip="Eliminar tarea" matTooltipPosition="above" mat-icon-button (click)="removeTask(ticket.id)">
+        <mat-icon aria-label="icon-button to remove">delete</mat-icon>
+    </button>
+    <p class="task__date"><strong>Fecha de finalización:</strong> {{ ticket.allegedSolveDate | date }}</p>
+    <p class="task__description">{{ticket.description}}</p>
+</div>

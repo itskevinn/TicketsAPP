@@ -1,28 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from 'src/app/core/service/api.service';
-import { ListSchema } from 'src/app/data/models/list/listschema';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent implements OnInit {
-  today: number = Date.now();
-  lists: ListSchema[];
 
-  constructor(private apiService: ApiService) {
-    this.lists = [];
-  }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-    this.getDataList();
-  }
-
-  getDataList(): void {
-    this.apiService.getApi().subscribe(
-      (response: any) => this.lists = response['list'],
-      error => console.log('Ups! we have an error: ', error)
-    );
-  }
+    ngOnInit(): void {
+    }
+    
 }
