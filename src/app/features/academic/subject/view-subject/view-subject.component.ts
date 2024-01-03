@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from '../../../data/models/subject/subject';
-import { SubjectService } from '../../../data/services/subject/subject.service';
+import { Subject } from '../../../../data/models/subject/subject';
+import { SubjectService } from '../../../../data/services/subject/subject.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 
@@ -64,7 +64,7 @@ export class ViewSubjectComponent implements OnInit{
             rejectButtonStyleClass:"p-button-text",
             accept: () => {
                 this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'Request submitted' });
-                this.router.navigate(['/subjects/edit/'+ subject.code])
+                this.router.navigate(['/subject/edit/'+ subject.code])
             },
             reject: () => {
                 this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'Process incomplete', life: 3000 });
@@ -75,7 +75,7 @@ export class ViewSubjectComponent implements OnInit{
       }
     }
     editStudentList(subject: Subject){
-      this.router.navigate(['/subjects/edit/'+ subject.id])
+      this.router.navigate(['/subject/edit/'+ subject.id])
     }
 
     onSelectionChange(value = []) {

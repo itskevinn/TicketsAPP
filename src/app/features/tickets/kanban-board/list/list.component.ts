@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import { List } from "../../../data/models/ticket/list";
+import { List } from "../../../../data/models/ticket/list";
 import { TicketService } from 'src/app/data/services/ticket/ticket.service';
-import {Ticket} from "../../../data/models/ticket/ticket";
+import {Ticket} from "../../../../data/models/ticket/ticket";
 
 @Component({
     selector: 'app-list',

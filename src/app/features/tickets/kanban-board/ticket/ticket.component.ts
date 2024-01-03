@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {TicketService} from 'src/app/data/services/ticket/ticket.service';
 import {MatDialog} from "@angular/material/dialog";
-import {Ticket} from "../../../data/models/ticket/ticket";
+import {Ticket} from "../../../../data/models/ticket/ticket";
 import {tick} from "@angular/core/testing";
-import {List} from "../../../data/models/ticket/list";
+import {List} from "../../../../data/models/ticket/list";
 
 @Component({
     selector: 'app-ticket',

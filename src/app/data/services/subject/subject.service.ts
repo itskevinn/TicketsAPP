@@ -18,7 +18,7 @@ export class SubjectService {
                 quantity: 24,
                 inventoryStatus: 'INSTOCK',
                 rating: 5,
-                routerLink: '/register'
+                routerLink: '/register-user'
             },
             {
                 id: '1001',

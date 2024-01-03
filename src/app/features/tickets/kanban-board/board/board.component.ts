@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { List } from "../../../data/models/ticket/list";
-import { TicketService } from "../../../data/services/ticket/ticket.service";
+import { List } from "../../../../data/models/ticket/list";
+import { TicketService } from "../../../../data/services/ticket/ticket.service";
 import { ActivatedRoute } from "@angular/router";
 import { catchError, map, Subscription } from "rxjs";
 

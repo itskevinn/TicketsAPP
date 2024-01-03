@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {ContentLayoutComponent} from "./layout/content-layout/content-layout.component";
 import {AuthGuard} from "./core/guards/auth.guard";
-import {RegisterUserComponent} from "./features/register/register/register-user.component";
+import {RegisterUserComponent} from "./features/security/register/register-user/register-user.component";
 
 const routes: Routes = [
   {
@@ -21,16 +21,13 @@ const routes: Routes = [
           import('./features/home/home.module').then(m => m.HomeModule)
       },
       {
-        path: 'projects',
-        loadChildren: () => import('./features/tickets/ticket/ticket.module').then(m => m.TicketModule)
+        path: 'academic',
+        loadChildren: () =>
+          import('./features/academic/academic.module').then(m => m.AcademicModule)
       },
       {
         path: 'users',
         loadChildren: () => import('./features/security/user/user.module').then(m => m.UserModule)
-      },
-      {
-        path: 'subjects',
-        loadChildren: () => import('./features/subject/subject.module').then(m => m.SubjectModule)
       }
     ]
   },
@@ -38,7 +35,7 @@ const routes: Routes = [
     path: 'register',
     component: RegisterUserComponent,
     loadChildren: () =>
-      import('./features/register/register.module').then(m => m.RegisterModule)
+      import('./features/security/register/register.module').then(m => m.RegisterModule)
   },
   {
     path: 'auth',
@@ -49,8 +46,8 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }
