@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./home/home.component";
+import {TeachersInfoComponent} from "./teachers-info/teachers-info.component";
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'teachers',
     pathMatch: 'full'
   },
   {
     path: '',
-    component: HomeComponent
+    component: TeachersInfoComponent
   }
 ];
 
@@ -18,5 +18,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {
+export class TeacherRoutingModule {
 }

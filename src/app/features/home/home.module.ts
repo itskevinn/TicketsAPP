@@ -14,9 +14,9 @@ const components = [MatToolbarModule, MatIconModule];
         HomeComponent,
     ],
     imports: [
-        HomeRoutingModule,
         SharedModule,
-        KanbanBoardModule,
+        HomeRoutingModule,
+        KanbanBoardModule
     ],
     exports: components
 })
