@@ -6,10 +6,14 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'teachers',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '',
+    data: {
+      breadcrumb: 'Profesores',
+      url: 'academic/teachers'
+    },
     component: TeachersInfoComponent
   }
 ];

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from '../../../../data/models/subject/subject';
-import { SubjectService } from '../../../../data/services/subject/subject.service';
+import { Subject } from '../../../../data/models/academic/subject';
+import { SubjectService } from '../../../../data/services/academic/subject.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 

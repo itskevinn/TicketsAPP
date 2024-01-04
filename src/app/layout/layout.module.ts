@@ -13,6 +13,7 @@ import {FooterComponent} from './footer/footer.component';
 import {RouterModule} from "@angular/router";
 import {HomeModule} from "../features/home/home.module";
 import {UserModule} from "../features/security/user/user.module";
+import {BreadcrumbComponent} from "./breadcrumb/breadcrumb.component";
 
 @NgModule({
   declarations: [ContentLayoutComponent,
@@ -21,6 +22,7 @@ import {UserModule} from "../features/security/user/user.module";
     MenuitemComponent,
     SidebarComponent,
     FooterComponent,
+    BreadcrumbComponent
   ],
   exports: [
     ContentLayoutComponent

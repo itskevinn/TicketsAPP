@@ -9,6 +9,9 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
+    data: {
+      breadcrumb: 'Estudiantes'
+    },
     path: '',
     component: StudentsInfoComponent
   }

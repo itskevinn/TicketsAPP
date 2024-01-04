@@ -50,3 +50,13 @@ const MAX_WIDTH_PHONE = 600;
 export function getDialogWidth(desktopWidth = '45%'): string {
   return screen.width < MAX_WIDTH_PHONE ? '100vw' : desktopWidth;
 }
+
+/**
+ * función  function isNullOrUndefined
+ * @param value any
+ * @returns boolean
+ */
+export function isNullOrUndefined(value: any) {
+  return value === null || value === undefined;
+}
+
