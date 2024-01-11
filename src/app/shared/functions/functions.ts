@@ -29,6 +29,18 @@ export function markFormControlsAsDirty(form: FormGroup): void {
 }
 
 /**
+ * Esta función marca los campos de un formulario
+ * como tocados para poder ver donde se encuentran
+ * los errores colocados con los Validators del FormGroup
+ *
+ * @param form - Formulario a tocar campos
+ * */
+export function markFormControlsAsTouched(form: FormGroup): void {
+  const controls = form.controls;
+  Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
+}
+
+/**
  * Esta función desuscribe las suscripciones enviadas
  * por parámetro
  *

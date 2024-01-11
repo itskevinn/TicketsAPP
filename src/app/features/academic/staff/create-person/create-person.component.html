@@ -1,0 +1,41 @@
+<ng-template pTemplate="content">
+  <div [formGroup]="personForm">
+    <div class="row my-1">
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Primer nombre"
+               formControlName="firstName">
+      </div>
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Segundo nombre"
+               formControlName="middleName">
+      </div>
+    </div>
+    <div class="row  my-1">
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Primer apellido"
+               formControlName="lastName">
+      </div>
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Segundo apellido"
+               formControlName="secondLastName">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 my-1">
+        <input class="w-100" type="text" pInputText placeholder="Correo electrónico"
+               formControlName="email">
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template pTemplate="footer">
+  <p-button label="Sign-In" (click)="confirm()" [text]="true"
+            styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"
+            class="w-full"></p-button>
+  <p-button label="Cancel" [text]="true"
+            styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"
+            class="w-full"></p-button>
+</ng-template>
+
+

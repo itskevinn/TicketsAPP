@@ -26,7 +26,6 @@ export class BreadcrumbComponent {
 
   private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: MenuItem[] = []): MenuItem[] {
     const children: ActivatedRoute[] = route.children;
-
     if (children.length === 0) {
       return breadcrumbs;
     }
@@ -40,8 +39,7 @@ export class BreadcrumbComponent {
       const label = child.snapshot.data[BreadcrumbComponent.ROUTE_DATA_BREADCRUMB_LABEL];
       if (!isNullOrUndefined(label) && !isNullOrUndefined(BreadcrumbComponent.ROUTE_DATA_BREADCRUMB_URL)) {
         breadcrumbs.push({label, url});
-      }
-      else if (!isNullOrUndefined(label)) {
+      } else if (!isNullOrUndefined(label)) {
         breadcrumbs.push({label});
       }
 
