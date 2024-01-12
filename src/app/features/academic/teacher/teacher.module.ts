@@ -8,6 +8,8 @@ import {CreateModifyTeacherComponent} from "./create-modify-teacher/create-modif
 import {TeacherRoutingModule} from "./teacher-routing.module";
 import {StaffModule} from "../staff/staff.module";
 import {DialogModule} from "primeng/dialog";
+import {FileUploadModule} from "primeng/fileupload";
+import {ToolbarModule} from "primeng/toolbar";
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import {DialogModule} from "primeng/dialog";
     TeacherRoutingModule,
     PaginatorModule,
     StaffModule,
-    DialogModule
+    DialogModule,
+    FileUploadModule,
+    ToolbarModule
   ]
 })
 export class TeacherModule {

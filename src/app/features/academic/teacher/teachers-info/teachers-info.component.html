@@ -1,57 +1,94 @@
+<p-toolbar styleClass="mb-4">
+  <ng-template pTemplate="left">
+    <div class="my-2">
+      <button pButton pRipple label="Nuevo" icon="pi pi-plus" class="p-button-success mr-2"
+              (click)="showRegisterModifyTeacherDialog('Crear')"></button>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="right">
+    <p-fileUpload mode="basic" accept="text/csv" [maxFileSize]="1000" [auto]="true" chooseLabel="Importar"
+                  class="mr-1 inline-block" (onUpload)="handleFile($event)"></p-fileUpload>
+    <button pButton pRipple label="Exportar" icon="pi pi-upload" class="p-button-warning mx-1"
+            (click)="teachersDt.exportCSV()"></button>
+  </ng-template>
+</p-toolbar>
 <p-table
     #teachersDt
     [value]="teachers"
     dataKey="id"
+    exportFilename="Profesores"
     [rows]="10"
     [showCurrentPageReport]="true"
     [rowsPerPageOptions]="[10, 25, 50]"
     [paginator]="true"
+    [columns]="cols"
     currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} registros"
     [globalFilterFields]="['firstName', 'middleName', 'lastName', 'secondLastName']"
+    responsiveLayout="scroll"
 >
-  <ng-template pTemplate="caption">
-    <div class="row">
-      <div class="col-6">
-        <div class="flex">
-            <span class="p-input-icon-left ml-auto w-75">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="teachersDt.filterGlobal($any($event).target.value, 'contains')"
-                       placeholder="Buscar" class=" w-75"/>
-            </span>
-        </div>
+  <div class="row">
+    <ng-template pTemplate="caption">
+      <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+        <h5 class="m-0">Manage Products</h5>
+        <span class="block mt-2 md:mt-0 p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input pInputText type="text" placeholder="Buscar..." class="w-full sm:w-auto"/>
+                        </span>
       </div>
-      <div class="col-6 justify-content-end d-flex">
-        <button pButton pRipple type="button" icon="fa-solid fa-plus"
-                (click)="showRegisterModifyTeacherDialog('Crear')"
-                class="p-button-raised p-button-primary p-button-text" label="Nuevo profesor "></button>
-      </div>
-    </div>
-  </ng-template>
+    </ng-template>
+  </div>
 
   <ng-template pTemplate="header">
     <tr>
-      <th scope="col">Nombres</th>
-      <th scope="col">Apellidos</th>
+      <th scope="col" pSortableColumn="firstName">Primer Nombre
+        <p-sortIcon field="code"></p-sortIcon>
+      </th>
+      <th scope="col" pSortableColumn="middleName">Segundo Nombre
+        <p-sortIcon field="middleName"></p-sortIcon>
+      </th>
+      <th scope="col" pSortableColumn="lastName">Primer Apellido
+        <p-sortIcon field="lastName"></p-sortIcon>
+      </th>
+      <th scope="col" pSortableColumn="secondLastName">Segundo Apellido
+        <p-sortIcon field="secondLastName"></p-sortIcon>
+      </th>
+      <th scope="col" pSortableColumn="email">Correo electrónico
+        <p-sortIcon field="email"></p-sortIcon>
+      </th>
+      <th scope="col">
+      </th>
     </tr>
   </ng-template>
   <ng-template pTemplate="body" let-teacher>
     <tr>
-      <td>{{ teacher.firstName }} {{teacher.middleName}}</td>
-      <td>{{ teacher.lastName }} {{teacher.secondLastName}}</td>
+      <td>{{ teacher.firstName }} </td>
+      <td>{{ teacher.middleName }} </td>
+      <td>{{ teacher.lastName }} </td>
+      <td>{{ teacher.secondLastName }} </td>
+      <td>{{ teacher.email }} </td>
+      <td>
+        <div class="flex">
+          <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success mx-1"
+                  (click)="showRegisterModifyTeacherDialog('Editar',teacher)"></button>
+          <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger mx-1"
+                  (click)="delete(teacher)"></button>
+        </div>
+      </td>
     </tr>
   </ng-template>
-
-
 </p-table>
 
-<p-dialog [(visible)]="teacherDialog" header="Nuevo Profesor" [modal]="true" [style]="{width: '550px'}" class="p-fluid">
+<p-dialog [(visible)]="showTeacherDialog" [header]="action + ' profesor'" [modal]="true" [style]="{width: '550px'}"
+          class="p-fluid">
   <div [formGroup]="personForm">
     <div class="row my-1">
       <div class="col-6">
         <input type="text" id="name" required autofocus
                class="w-100" pInputText placeholder="Primer nombre"
                formControlName="firstName"/>
-        <small class="ng-dirty ng-invalid" *ngIf="!teacher.firstName">Nombre es requerido.</small>
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !personForm.controls['firstName'].valid">El nombre es
+          requerido</small>
       </div>
 
       <div class="col-6">
@@ -63,23 +100,43 @@
       <div class="col-6">
         <input class="w-100" type="text" pInputText placeholder="Primer apellido"
                formControlName="lastName">
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !personForm.controls['lastName'].valid">El apellido es
+          requerido</small>
       </div>
       <div class="col-6">
         <input class="w-100" type="text" pInputText placeholder="Segundo apellido"
                formControlName="secondLastName">
       </div>
     </div>
-    <div class="row">
-      <div class="col-12 my-1">
+    <div class="row my-2">
+      <div class="col-12">
         <input class="w-100" type="text" pInputText placeholder="Correo electrónico"
                formControlName="email">
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !personForm.controls['email'].valid">El correo es
+          requerido</small>
       </div>
     </div>
   </div>
 
-  <div class="row">
-    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
-            (click)="teacherDialog=false"></button>
-    <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="confirm()"></button>
+  <div class="row justify-content-end">
+    <div class="col-3">
+      <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
+              (click)="showTeacherDialog=false"></button>
+    </div>
+    <div class="col-3">
+      <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="confirm()"></button>
+    </div>
   </div>
+</p-dialog>
+<p-dialog [(visible)]="showDeleteTeacherDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
+  <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
+    <span>¿Estás seguro que quieres eliminar este estudiante?</span>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No"
+            (click)="closeDialog()"></button>
+    <button pButton pRipple icon="pi pi-check" class="p-button-text" label="Sí"
+            (click)="confirmDeleteSelected()"></button>
+  </ng-template>
 </p-dialog>

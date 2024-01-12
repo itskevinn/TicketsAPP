@@ -1,153 +1,153 @@
-import { Injectable, effect, signal } from '@angular/core';
-import { Subject } from 'rxjs';
+import {Injectable, effect, signal} from '@angular/core';
+import {Subject} from 'rxjs';
 
 export interface AppConfig {
-    inputStyle: string;
-    colorScheme: string;
-    theme: string;
-    ripple: boolean;
-    menuMode: string;
-    scale: number;
+  inputStyle: string;
+  colorScheme: string;
+  theme: string;
+  ripple: boolean;
+  menuMode: string;
+  scale: number;
 }
 
 interface LayoutState {
-    staticMenuDesktopInactive: boolean;
-    overlayMenuActive: boolean;
-    profileSidebarVisible: boolean;
-    configSidebarVisible: boolean;
-    staticMenuMobileActive: boolean;
-    menuHoverActive: boolean;
+  staticMenuDesktopInactive: boolean;
+  overlayMenuActive: boolean;
+  profileSidebarVisible: boolean;
+  configSidebarVisible: boolean;
+  staticMenuMobileActive: boolean;
+  menuHoverActive: boolean;
 }
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class LayoutService {
 
-    _config: AppConfig = {
-        ripple: false,
-        inputStyle: 'outlined',
-        menuMode: 'static',
-        colorScheme: 'light',
-        theme: 'lara-light-teal',
-        scale: 14,
-    };
+  _config: AppConfig = {
+    ripple: true,
+    inputStyle: 'outlined',
+    menuMode: 'static',
+    colorScheme: 'light',
+    theme: 'tailwind-light',
+    scale: 13,
+  };
 
-    config = signal<AppConfig>(this._config);
+  config = signal<AppConfig>(this._config);
 
-    state: LayoutState = {
-        staticMenuDesktopInactive: false,
-        overlayMenuActive: false,
-        profileSidebarVisible: false,
-        configSidebarVisible: false,
-        staticMenuMobileActive: false,
-        menuHoverActive: false
-    };
+  state: LayoutState = {
+    staticMenuDesktopInactive: false,
+    overlayMenuActive: false,
+    profileSidebarVisible: false,
+    configSidebarVisible: false,
+    staticMenuMobileActive: false,
+    menuHoverActive: false
+  };
 
-    private configUpdate = new Subject<AppConfig>();
+  private configUpdate = new Subject<AppConfig>();
 
-    private overlayOpen = new Subject<any>();
+  private overlayOpen = new Subject<any>();
 
-    configUpdate$ = this.configUpdate.asObservable();
+  configUpdate$ = this.configUpdate.asObservable();
 
-    overlayOpen$ = this.overlayOpen.asObservable();
+  overlayOpen$ = this.overlayOpen.asObservable();
 
-    onMenuToggle() {
-        if (this.isOverlay()) {
-            this.state.overlayMenuActive = !this.state.overlayMenuActive;
-            if (this.state.overlayMenuActive) {
-                this.overlayOpen.next(null);
-            }
-        }
-
-        if (this.isDesktop()) {
-            this.state.staticMenuDesktopInactive = !this.state.staticMenuDesktopInactive;
-        }
-        else {
-            this.state.staticMenuMobileActive = !this.state.staticMenuMobileActive;
-
-            if (this.state.staticMenuMobileActive) {
-                this.overlayOpen.next(null);
-            }
-        }
+  onMenuToggle() {
+    if (this.isOverlay()) {
+      this.state.overlayMenuActive = !this.state.overlayMenuActive;
+      if (this.state.overlayMenuActive) {
+        this.overlayOpen.next(null);
+      }
     }
 
-    showProfileSidebar() {
-        this.state.profileSidebarVisible = !this.state.profileSidebarVisible;
-        if (this.state.profileSidebarVisible) {
-            this.overlayOpen.next(null);
-        }
+    if (this.isDesktop()) {
+      this.state.staticMenuDesktopInactive = !this.state.staticMenuDesktopInactive;
+    } else {
+      this.state.staticMenuMobileActive = !this.state.staticMenuMobileActive;
+
+      if (this.state.staticMenuMobileActive) {
+        this.overlayOpen.next(null);
+      }
     }
+  }
 
-    showConfigSidebar() {
-        this.state.configSidebarVisible = true;
+  showProfileSidebar() {
+    this.state.profileSidebarVisible = !this.state.profileSidebarVisible;
+    if (this.state.profileSidebarVisible) {
+      this.overlayOpen.next(null);
     }
+  }
 
-    isOverlay() {
-        return this.config().menuMode === 'overlay';
-    }
+  showConfigSidebar() {
+    this.state.configSidebarVisible = true;
+  }
 
-    isDesktop() {
-        return window.innerWidth > 991;
-    }
+  isOverlay() {
+    return this.config().menuMode === 'overlay';
+  }
 
-    isMobile() {
-        return !this.isDesktop();
-    }
+  isDesktop() {
+    return window.innerWidth > 991;
+  }
 
-    onConfigUpdate() {
-        this._config = { ...this.config() };
-        this.configUpdate.next(this.config());
-    }
+  isMobile() {
+    return !this.isDesktop();
+  }
 
-    constructor() {
-        effect(() => {
-            const config = this.config();
-            this.changeTheme();
-            this.changeScale(config.scale);
-            this.onConfigUpdate();
-        });
-    }
+  onConfigUpdate() {
+    this._config = {...this.config()};
+    this.configUpdate.next(this.config());
+  }
 
-    changeTheme() {
-        const config = this.config();
-        const themeLink = <HTMLLinkElement>(
-            document.getElementById('light-css-theme')
-        );
-        const themeLinkHref = themeLink.getAttribute('href')!;
-        const newHref = themeLinkHref
-            .split('/')
-            .map((el) =>
-                el == this._config.theme
-                    ? (el = config.theme)
-                    : el == `theme-${this._config.colorScheme}`
-                        ? (el = `theme-${config.colorScheme}`)
-                        : el
-            )
-            .join('/');
+  constructor() {
+    effect(() => {
+      const config = this.config();
+      this.changeTheme();
+      this.changeScale(config.scale);
+      this.onConfigUpdate();
+    });
+  }
 
-        this.replaceThemeLink(newHref);
-    }
-    replaceThemeLink(href: string) {
-        const id = 'light-css-theme';
-        let themeLink = <HTMLLinkElement>document.getElementById(id);
-        const cloneLinkElement = <HTMLLinkElement>themeLink.cloneNode(true);
+  changeTheme() {
+    const config = this.config();
+    const themeLink = <HTMLLinkElement>(
+      document.getElementById('light-css-theme')
+    );
+    const themeLinkHref = themeLink.getAttribute('href')!;
+    const newHref = themeLinkHref
+      .split('/')
+      .map((el) =>
+        el == this._config.theme
+          ? (el = config.theme)
+          : el == `theme-${this._config.colorScheme}`
+            ? (el = `theme-${config.colorScheme}`)
+            : el
+      )
+      .join('/');
 
-        cloneLinkElement.setAttribute('href', href);
-        cloneLinkElement.setAttribute('id', id + '-clone');
+    this.replaceThemeLink(newHref);
+  }
 
-        themeLink.parentNode!.insertBefore(
-            cloneLinkElement,
-            themeLink.nextSibling
-        );
-        cloneLinkElement.addEventListener('load', () => {
-            themeLink.remove();
-            cloneLinkElement.setAttribute('id', id);
-        });
-    }
+  replaceThemeLink(href: string) {
+    const id = 'light-css-theme';
+    let themeLink = <HTMLLinkElement>document.getElementById(id);
+    const cloneLinkElement = <HTMLLinkElement>themeLink.cloneNode(true);
 
-    changeScale(value: number) {
-        document.documentElement.style.fontSize = `${value}px`;
-    }
+    cloneLinkElement.setAttribute('href', href);
+    cloneLinkElement.setAttribute('id', id + '-clone');
+
+    themeLink.parentNode!.insertBefore(
+      cloneLinkElement,
+      themeLink.nextSibling
+    );
+    cloneLinkElement.addEventListener('load', () => {
+      themeLink.remove();
+      cloneLinkElement.setAttribute('id', id);
+    });
+  }
+
+  changeScale(value: number) {
+    document.documentElement.style.fontSize = `${value}px`;
+  }
 
 }
