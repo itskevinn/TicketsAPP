@@ -8,10 +8,10 @@ import { SubjectService } from '../../../../data/services/academic/subject.servi
   styleUrl: './edit-subject.component.scss'
 })
 export class EditSubjectComponent implements OnInit{
-  subject!: any;
+  subjectId!: any;
   constructor(private route: ActivatedRoute, private subjectService: SubjectService){}
   ngOnInit(): void {
-    this.subject = this.route.data;
-    console.log(this.subject)
+    this.subjectId = this.route;
+    console.log(this.subjectId)
   }
 }
