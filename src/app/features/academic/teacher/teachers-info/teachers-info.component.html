@@ -44,44 +44,42 @@
 
 </p-table>
 
-<p-dialog [(visible)]="teacherDialog" header="Nuevo Profesor" [modal]="true" [style]="{width: '550px'}">
-  <ng-template pTemplate="content">
-    <div [formGroup]="personForm">
-      <div class="row my-1">
-        <div class="col-6">
-          <input type="text" id="name" required autofocus
-                 class="w-100" pInputText placeholder="Primer nombre"
-                 formControlName="firstName"/>
-          <small class="ng-dirty ng-invalid" *ngIf="!teacher.firstName">Nombre es requerido.</small>
-        </div>
+<p-dialog [(visible)]="teacherDialog" header="Nuevo Profesor" [modal]="true" [style]="{width: '550px'}" class="p-fluid">
+  <div [formGroup]="personForm">
+    <div class="row my-1">
+      <div class="col-6">
+        <input type="text" id="name" required autofocus
+               class="w-100" pInputText placeholder="Primer nombre"
+               formControlName="firstName"/>
+        <small class="ng-dirty ng-invalid" *ngIf="!teacher.firstName">Nombre es requerido.</small>
+      </div>
 
-        <div class="col-6">
-          <input class="w-100" type="text" pInputText placeholder="Segundo nombre"
-                 formControlName="middleName">
-        </div>
-      </div>
-      <div class="row my-2">
-        <div class="col-6">
-          <input class="w-100" type="text" pInputText placeholder="Primer apellido"
-                 formControlName="lastName">
-        </div>
-        <div class="col-6">
-          <input class="w-100" type="text" pInputText placeholder="Segundo apellido"
-                 formControlName="secondLastName">
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-12 my-1">
-          <input class="w-100" type="text" pInputText placeholder="Correo electrónico"
-                 formControlName="email">
-        </div>
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Segundo nombre"
+               formControlName="middleName">
       </div>
     </div>
-  </ng-template>
+    <div class="row my-2">
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Primer apellido"
+               formControlName="lastName">
+      </div>
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Segundo apellido"
+               formControlName="secondLastName">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 my-1">
+        <input class="w-100" type="text" pInputText placeholder="Correo electrónico"
+               formControlName="email">
+      </div>
+    </div>
+  </div>
 
-  <ng-template pTemplate="footer">
-    <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text"
+  <div class="row">
+    <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
             (click)="teacherDialog=false"></button>
-    <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="confirm()"></button>
-  </ng-template>
+    <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text" (click)="confirm()"></button>
+  </div>
 </p-dialog>
