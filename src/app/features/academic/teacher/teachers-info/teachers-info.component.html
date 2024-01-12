@@ -1,3 +1,4 @@
+<h3>Profesores</h3>
 <p-toolbar styleClass="mb-4">
   <ng-template pTemplate="left">
     <div class="my-2">
@@ -81,13 +82,13 @@
 
 <p-dialog [(visible)]="showTeacherDialog" [header]="action + ' profesor'" [modal]="true" [style]="{width: '550px'}"
           class="p-fluid">
-  <div [formGroup]="personForm">
+  <div [formGroup]="teacherForm">
     <div class="row my-1">
       <div class="col-6">
         <input type="text" id="name" required autofocus
                class="w-100" pInputText placeholder="Primer nombre"
                formControlName="firstName"/>
-        <small class="ng-dirty ng-invalid" *ngIf="submitted && !personForm.controls['firstName'].valid">El nombre es
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !teacherForm.controls['firstName'].valid">El nombre es
           requerido</small>
       </div>
 
@@ -100,7 +101,7 @@
       <div class="col-6">
         <input class="w-100" type="text" pInputText placeholder="Primer apellido"
                formControlName="lastName">
-        <small class="ng-dirty ng-invalid" *ngIf="submitted && !personForm.controls['lastName'].valid">El apellido es
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !teacherForm.controls['lastName'].valid">El apellido es
           requerido</small>
       </div>
       <div class="col-6">
@@ -112,7 +113,7 @@
       <div class="col-12">
         <input class="w-100" type="text" pInputText placeholder="Correo electrónico"
                formControlName="email">
-        <small class="ng-dirty ng-invalid" *ngIf="submitted && !personForm.controls['email'].valid">El correo es
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !teacherForm.controls['email'].valid">El correo es
           requerido</small>
       </div>
     </div>

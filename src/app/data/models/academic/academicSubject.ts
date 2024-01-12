@@ -1,4 +1,4 @@
-export interface Subject {
+export interface AcademicSubject {
     id?: string;
     code?: string;
     name?: string;

@@ -5,6 +5,9 @@ import {StudentRoutingModule} from './student-routing.module';
 import {SharedModule} from "../../../shared/shared.module";
 import {StudentsInfoComponent} from "./students-info/students-info.component";
 import {PaginatorModule} from "primeng/paginator";
+import {DialogModule} from "primeng/dialog";
+import {FileUploadModule} from "primeng/fileupload";
+import {ToolbarModule} from "primeng/toolbar";
 
 
 @NgModule({
@@ -14,6 +17,9 @@ import {PaginatorModule} from "primeng/paginator";
     SharedModule,
     StudentRoutingModule,
     PaginatorModule,
+    DialogModule,
+    FileUploadModule,
+    ToolbarModule,
   ]
 })
 export class StudentModule {

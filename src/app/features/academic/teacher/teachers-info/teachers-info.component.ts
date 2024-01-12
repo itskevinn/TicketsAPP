@@ -18,7 +18,7 @@ import {CREATE, UPDATE} from "../../../../core/constants/actions";
 })
 export class TeachersInfoComponent implements OnInit, OnDestroy {
   teachers: Teacher[] = [];
-  personForm: FormGroup;
+  teacherForm: FormGroup;
   private destroy$ = new Subject<void>();
   showTeacherDialog: boolean = false;
   action: string = '';
@@ -28,7 +28,7 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
   cols: any[] = [];
 
   constructor(private teacherService: TeacherService, private formBuilder: FormBuilder, private messageService: MessageService) {
-    this.personForm = this.buildPersonForm();
+    this.teacherForm = this.buildPersonForm();
     this.cols = [
       {field: 'firstName', header: 'Primer Nombre'},
       {field: 'middleName', header: 'Segundo Nombre'},
@@ -53,7 +53,7 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
   }
 
   private buildPersonForm(): FormGroup {
-    this.personForm = this.formBuilder.group({
+    this.teacherForm = this.formBuilder.group({
       id: [],
       firstName: ['', Validators.required],
       middleName: [],
@@ -61,23 +61,23 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
       secondLastName: [],
       email: ['', Validators.required]
     });
-    return this.personForm;
+    return this.teacherForm;
   }
 
-  private setPersonFormValues(person: Person) {
-    setFormValues(this.personForm, person);
+  private setPersonFormValues(teacher: Person) {
+    setFormValues(this.teacherForm, teacher);
   }
 
   public confirm(): void {
-    let person: Person;
+    let teacher: Person;
     this.submitted = true;
-    if (this.personForm.invalid) {
-      markFormControlsAsDirty(this.personForm);
+    if (this.teacherForm.invalid) {
+      markFormControlsAsDirty(this.teacherForm);
       return;
     }
-    person = this.personForm.value;
-    if (this.action === CREATE) this.save(person);
-    if (this.action === UPDATE) this.update(person);
+    teacher = this.teacherForm.value;
+    if (this.action === CREATE) this.save(teacher);
+    if (this.action === UPDATE) this.update(teacher);
   }
 
   private save(teacher: Teacher): void {
@@ -102,7 +102,7 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
       this.getTeachers();
     });
     this.showTeacherDialog = false;
-    this.personForm.reset();
+    this.teacherForm.reset();
   }
 
   private update(teacher: Teacher): void {
@@ -127,12 +127,12 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
       this.getTeachers();
     });
     this.showTeacherDialog = false;
-    this.personForm.reset();
+    this.teacherForm.reset();
   }
 
   public closeDialog() {
     this.showTeacherDialog = false;
-    this.personForm.reset();
+    this.teacherForm.reset();
   }
 
   public delete(teacher: Teacher): void {

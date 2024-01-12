@@ -51,3 +51,19 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.data-view-card {
+
+  :hover {
+    background-color: #eee6e6;
+    cursor: pointer;
+  }
+
+  .card {
+    border: solid 0.5px var(--primary-color) !important;
+  }
+}
+
+.p-breadcrumb-list{
+  margin-bottom: 0;
+}

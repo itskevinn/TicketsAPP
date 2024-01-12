@@ -4,38 +4,30 @@ import {ViewSubjectComponent} from './view-subject/view-subject.component';
 import {EditSubjectComponent} from './edit-subject/edit-subject.component';
 import {CreateSubjectComponent} from './create-subject/create-subject.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'subjects',
-    pathMatch: 'full'
-  },
+const routes = [
   {
     path: '',
     component: ViewSubjectComponent,
     data: {
       breadcrumb: 'Asignaturas'
-    },
-    children: [
-      {
-        path: 'edit/:subject',
-        component: EditSubjectComponent,
-        data: {
-          breadcrumb: 'Editar Asignatura'
-        },
-        pathMatch: 'prefix'
-      },
-      {
-        path: 'create',
-        component: CreateSubjectComponent,
-        data: {
-          breadcrumb: 'Crear Asignatura'
-        },
-        pathMatch: 'prefix'
-      }
-    ]
+    }
   },
+  {
+    path: 'edit/:subject',
+    component: EditSubjectComponent,
+    data: {
+      breadcrumb: 'Editar Asignatura'
+    },
+  },
+  {
+    path: 'create',
+    component: CreateSubjectComponent,
+    data: {
+      breadcrumb: 'Crear Asignatura'
+    }
+  }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

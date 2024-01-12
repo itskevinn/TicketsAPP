@@ -12,7 +12,7 @@ import {isNullOrUndefined} from "../../shared/functions/functions";
 export class BreadcrumbComponent {
   static readonly ROUTE_DATA_BREADCRUMB_LABEL = 'breadcrumb';
   static readonly ROUTE_DATA_BREADCRUMB_URL = 'url';
-  readonly home = {icon: 'fa-solid fa-home', url: 'home'};
+  readonly home = {icon: 'pi pi-home', url: 'home'};
   menuItems: MenuItem[] = [];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {

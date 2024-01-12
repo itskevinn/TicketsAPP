@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'src/app/data/models/academic/subject';
 import { SubjectService } from '../../../../data/services/academic/subject.service';
 @Component({
   selector: 'app-edit-subject',

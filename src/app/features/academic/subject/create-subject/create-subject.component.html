@@ -1,141 +1,43 @@
-<!--
-<div class="card card2">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card-body">
-                <a routerLink="/subject" class="btn btn-custom"><i class="fa fa-long-arrow-left"></i></a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <h1 class="text-center">Registro de asignatura</h1>
-        </div>
+<div class="row">
+  <div class="col-md-4">
+    <div class="card-body">
+      <a routerLink="../" class="btn btn-custom"><i class="fa fa-long-arrow-left"></i></a>
     </div>
-    <div class="row">
-        <div class="col-md-6 mb-6">
-            <div class="form-outline p-3">
-                <span class="p-float-label">
-                    <input pInputText id="subject_name" class="w-100" />
-                    <label for="subject_name">Nombre de la asignatura*</label>
-                </span>
-            </div>
-            <div class="form-outline p-3">
-                <span class="p-float-label">
-                    <p-panel header="Agregar grupo" [toggleable]="false">
-                        <span class="p-float-label my-3">
-                            <input pInputText id="subject_name" class="w-100" />
-                            <label for="subject_name">Nombre del grupo*</label>
-                        </span>
-                        <span class="p-float-label my-4">
-                            <textarea id="float-input" rows="5" cols="30" class="w-100 rounded" pInputTextarea></textarea>
-                            <label for="float-input">Descripción</label>
-                        </span>
-                        <div class="my-4">
-                            <p-panel header="Agregar docente*" [collapsed]="true" [toggleable]="true">
-                                <span>
-                                    <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione un docente para este grupo"></p-dropdown>
-                                </span>
-                            </p-panel>
-                        </div>
-                        <div class="my-4">
-                            <p-panel header="Agregar estudiante*" [collapsed]="true" [toggleable]="true">
-                                <span>
-                                    <p-multiSelect [options]="cities" [(ngModel)]="selectedCities" placeholder="Agrege a los estudiantes aquí" optionLabel="name" display="chip" [showClear]="true" class="w-auto"></p-multiSelect>
-                                </span>
-                            </p-panel>
-                        </div>
-                        <div class="my-4">
-                            <button class="btn btn-custom w-100">Crear grupo <i class="fa fa-plus"></i></button>
-                        </div>
-                    </p-panel>
-                </span>
-            </div>
-        </div>
-        <div class="col-md-6 mb-6">
-            <div class="form-outline p-3">
-                <p-table
-                        [value]="selectedCities"
-                        [globalFilterFields]="['name', 'code']"
-                        [paginator]="true"
-                        [rows]="3"
-                        [totalRecords]="totalRecords"
-                        [loading]="loading"
-                        (selectionChange)="onSelectionChange($event)"
-                        [selectAll]="selectAll"
-                        (selectAllChange)="onSelectAllChange($event)"
-                    >
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th pSortableColumn="name">Nombre <p-sortIcon field="name"></p-sortIcon></th>
-                            <th pSortableColumn="code">Apellido <p-sortIcon field="code"></p-sortIcon></th>
-                            <th>Quitar</th>
-                        </tr>
-                        <tr>
-                            <th>
-                                <p-columnFilter type="text" field="name"></p-columnFilter>
-                            </th>
-                            <th>
-                                <p-columnFilter type="text" field="code"></p-columnFilter>
-                            </th>
-                            <th></th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-student>
-                        <tr>
-                            <td>{{ student.name }}</td>
-                            <td>{{ student.code }}</td>
-                            <td>
-                                <button class="btn btn-danger" (click)="deleteStudentList(student)"><i class="fa fa-times"></i></button>
-                            </td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
-    </div>
-    <ng-template pTemplate="footer">
-                    <div class="grid grid-nogutter justify-content-end">
-                        <p-button label="Next"  icon="pi pi-angle-right" iconPos="right"></p-button>
-                    </div>
-                </ng-template>
+  </div>
+  <div class="col-md-4">
+    <h1 class="text-center">Crear grupo</h1>
+  </div>
 </div>
-<router-outlet></router-outlet> -->
-<div class="card card2">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card-body">
-                <a routerLink="/subjects" class="btn btn-custom"><i class="fa fa-long-arrow-left"></i></a>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <h1 class="text-center">Crear grupo</h1>
-        </div>
-    </div>
-    <div class="row">
-    <div class="col-md-6 mb-6">
-        <div class="form-outline p-3">
+<div class="row">
+  <div class="col-md-6 mb-6">
+    <div class="form-outline p-3">
             <span class="p-float-label my-4">
-                <input pInputText id="subject_name" class="w-100" />
+                <input pInputText id="subject_name" class="w-100"/>
                 <label for="subject_name">Nombre del grupo*</label>
             </span>
-            <span class="p-float-label my-4">
+      <span class="p-float-label my-4">
                 <textarea id="float-input" rows="5" cols="30" class="w-100 rounded" pInputTextarea></textarea>
                 <label for="float-input">Descripción</label>
             </span>
-        </div>
     </div>
-    <div class="col-md-6 mb-6">
-        <div class="form-outline p-3">
-            <div class="my-4">
-                <p-panel header="Agregar docente*" [collapsed]="true" [toggleable]="true">
+  </div>
+  <div class="col-md-6 mb-6">
+    <div class="form-outline p-3">
+      <div class="my-4">
+        <p-panel header="Agregar docente*" [collapsed]="true" [toggleable]="true">
                     <span>
-                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione un docente para este grupo"></p-dropdown>
+                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true"
+                                    filterBy="name" [showClear]="true"
+                                    placeholder="Seleccione un docente para este grupo"></p-dropdown>
                     </span>
-                </p-panel>
-            </div>
-            <div class="my-4">
-                <p-panel header="Agregar asignatura*" [collapsed]="true" [toggleable]="true">
+        </p-panel>
+      </div>
+      <div class="my-4">
+        <p-panel header="Agregar asignatura*" [collapsed]="true" [toggleable]="true">
                     <span>
-                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione un docente para este grupo"></p-dropdown>
+                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true"
+                                    filterBy="name" [showClear]="true"
+                                    placeholder="Seleccione un docente para este grupo"></p-dropdown>
                         <div class="my-4">
                             <span class="p-buttonset">
                                 <button pButton pRipple label="Crear asignatura" class="btn btn-custom"></button>
@@ -143,39 +45,40 @@
                             </span>
                         </div>
                     </span>
-                </p-panel>
-            </div>
-        </div>
+        </p-panel>
+      </div>
     </div>
+  </div>
 </div>
-    <div class="row">
-        <div class="col-md-6 mb-6">
-            <!-- <div class="my-4 a">
-                <button class="btn btn-custom">Anterior</button>
-            </div> -->
-        </div>
-        <div class="col-md-6 mb-6">
-            <div class="my-4 a text-end">
-                <button class="btn btn-custom">Crear</button>
-            </div>
-        </div>
+<div class="row">
+  <div class="col-md-6 mb-6">
+  </div>
+  <div class="col-md-6 mb-6">
+    <div class="my-4 a text-end">
+      <button class="btn btn-custom">Crear</button>
     </div>
+  </div>
 </div>
+
 <div class="card my-4">
-    <h1 class="text-center">Añadir estudiantes al grupo</h1>
-    <div class="col-md-6 mb-6">
-        <div class="form-outline p-3">
-            <div class="my-4">
-                <p-panel header="Agregar grupo*" [collapsed]="true" [toggleable]="true">
+  <h1 class="text-center">Añadir estudiantes al grupo</h1>
+  <div class="col-md-6 mb-6">
+    <div class="form-outline p-3">
+      <div class="my-4">
+        <p-panel header="Agregar grupo*" [collapsed]="true" [toggleable]="true">
                     <span>
-                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione un docente para este grupo"></p-dropdown>
+                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true"
+                                    filterBy="name" [showClear]="true"
+                                    placeholder="Seleccione un docente para este grupo"></p-dropdown>
                     </span>
-                </p-panel>
-            </div>
-            <div class="my-4">
-                <p-panel header="Agregar estudiantes*" [collapsed]="true" [toggleable]="true">
+        </p-panel>
+      </div>
+      <div class="my-4">
+        <p-panel header="Agregar estudiantes*" [collapsed]="true" [toggleable]="true">
                     <span>
-                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Seleccione un docente para este grupo"></p-dropdown>
+                        <p-dropdown [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" [filter]="true"
+                                    filterBy="name" [showClear]="true"
+                                    placeholder="Seleccione un docente para este grupo"></p-dropdown>
                         <div class="my-4">
                             <span class="p-buttonset">
                                 <button pButton pRipple label="Crear asignatura" class="btn btn-custom"></button>
@@ -183,21 +86,19 @@
                             </span>
                         </div>
                     </span>
-                </p-panel>
-            </div>
-        </div>
+        </p-panel>
+      </div>
     </div>
-    <div class="row">
-        <div class="col-md-6 mb-6">
-            <!-- <div class="my-4 a">
-                <button class="btn btn-custom">Anterior</button>
-            </div> -->
-        </div>
-        <div class="col-md-6 mb-6">
-            <div class="my-4 a text-end">
-                <button class="btn btn-custom">Añadir</button>
-            </div>
-        </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-6">
+
     </div>
+    <div class="col-md-6 mb-6">
+      <div class="my-4 a text-end">
+        <button class="btn btn-custom">Añadir</button>
+      </div>
+    </div>
+  </div>
 </div>
 
