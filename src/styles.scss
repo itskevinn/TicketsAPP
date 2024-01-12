@@ -1,19 +1,53 @@
 @import "assets/layout/styles/layout/layout";
+@import "primeicons/primeicons.css";
 
 html, body {
-    height: 100%;
-    background-color: #eff3f7!important;
+  height: 100%;
+  background-color: #eff3f7 !important;
 }
 
 body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
 }
 
-.card, .p-inputtext {
-    border-radius: 20px !important;
+/* Order */
+@layer reset, primeng;
+
+/* Reset CSS */
+@layer reset {
+  button,
+  input {
+    /* CSS to Reset */
+  }
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 30px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

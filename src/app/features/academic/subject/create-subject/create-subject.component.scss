@@ -1,0 +1,29 @@
+.board {
+    height: auto;
+}
+::ng-deep .p-multiselect{
+    width: 100%
+}
+::ng-deep .p-dropdown{
+    width: 100%;
+}
+.btn-custom {
+    background-color: rgb(112, 182, 32);
+    color: #ffffff;
+}
+
+.btn-custom:hover {
+    background-color: rgb(142, 197, 79);
+    color: #ffffff;
+}
+.card2 {
+    max-height: 80vh; // Establece una altura máxima
+    overflow-y: auto; // Agrega desplazamiento vertical si el contenido es demasiado grande
+    margin: 0 auto; // Centra la tarjeta horizontalmente
+    padding: 20px; // Añade relleno al contenido de la tarjeta
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    @media (max-width: 768px) {
+        max-height: none; // Elimina la altura máxima en pantallas más pequeñas
+    }
+}

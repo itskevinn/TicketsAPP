@@ -29,7 +29,7 @@ export class LayoutService {
         inputStyle: 'outlined',
         menuMode: 'static',
         colorScheme: 'light',
-        theme: 'saga-green',
+        theme: 'lara-light-teal',
         scale: 14,
     };
 
@@ -112,7 +112,7 @@ export class LayoutService {
     changeTheme() {
         const config = this.config();
         const themeLink = <HTMLLinkElement>(
-            document.getElementById('theme-css')
+            document.getElementById('light-css-theme')
         );
         const themeLinkHref = themeLink.getAttribute('href')!;
         const newHref = themeLinkHref
@@ -129,7 +129,7 @@ export class LayoutService {
         this.replaceThemeLink(newHref);
     }
     replaceThemeLink(href: string) {
-        const id = 'theme-css';
+        const id = 'light-css-theme';
         let themeLink = <HTMLLinkElement>document.getElementById(id);
         const cloneLinkElement = <HTMLLinkElement>themeLink.cloneNode(true);
 
