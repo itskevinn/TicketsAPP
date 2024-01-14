@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AcademicSubject} from '../../../../data/models/academic/academicSubject';
+import {AcademicSubject} from '../../../../data/models/academic/academic-subject';
 import {SubjectService} from '../../../../data/services/academic/subject.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
 import {Router} from '@angular/router';
@@ -73,7 +73,7 @@ export class ViewSubjectComponent implements OnInit {
       this.sortField = value;
     }
   }
-  
+
   public onFilter(dv: DataView, event: Event): void {
     dv.filter((event.target as HTMLInputElement).value);
   }
