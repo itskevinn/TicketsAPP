@@ -6,7 +6,7 @@
 <div class="row card-body">
   <div class="col-12 col-md-4">
     <h3>Grupos</h3>
-    <p-dataView [value]="classGroups" layout="grid">
+    <p-dataView [value]="classGroups" layout="grid" emptyMessage=" ">
       <ng-template let-groups pTemplate="gridItem">
         <div class="row">
           <div *ngFor="let group of groups" class="col-6 md:col-4">
