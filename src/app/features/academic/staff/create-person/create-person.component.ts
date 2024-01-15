@@ -1,34 +1,52 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Subject} from "rxjs";
-import {Person} from "../../../../data/models/academic/person";
-import {markFormControlsAsTouched, setFormValues} from "../../../../shared/functions/functions";
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { Person } from '../../../../data/models/academic/person';
+import {
+  markFormControlsAsTouched,
+  setFormValues,
+} from '../../../../shared/functions/functions';
+import {
+  DialogService,
+  DynamicDialogComponent,
+  DynamicDialogRef,
+} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-create-person',
   templateUrl: './create-person.component.html',
-  styleUrl: './create-person.component.scss'
+  styleUrl: './create-person.component.scss',
 })
 export class CreatePersonComponent implements OnInit, OnDestroy {
-
-  personForm: FormGroup;
-  private destroy$ = new Subject<void>();
-  @Input() data?: any;
   @Output() personEventEmitter = new EventEmitter<Person>();
+  dialogInstance: DynamicDialogComponent | undefined;
+  private destroy$ = new Subject<void>();
+  personForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
+    public ref: DynamicDialogRef,
+    private dialogService: DialogService
   ) {
     this.personForm = this.buildPersonForm();
+    this.dialogInstance = this.dialogService.getInstance(this.ref);
   }
 
   ngOnInit(): void {
+    console.log(this.dialogInstance);
+    console.log(this.dialogInstance?.data);
     this.validatePerson();
   }
 
   private validatePerson(): void {
-    if (this.data.person)
-      this.setPersonFormValues(this.data.person);
+    if (this.dialogInstance?.data.person)
+      this.setPersonFormValues(this.dialogInstance?.data.person);
   }
 
   private buildPersonForm(): FormGroup {
@@ -38,7 +56,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
       middleName: [],
       lastName: ['', Validators.required],
       secondLastName: [],
-      email: ['', Validators.required]
+      email: ['', Validators.required],
     });
     return this.personForm;
   }
@@ -47,18 +65,17 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
     setFormValues(this.personForm, person);
   }
 
-  public confirm(): void {
+  public confirm(result: any): void {
+    if (!result) {
+      this.ref.close();
+    }
     let person: Person;
     if (this.personForm.invalid) {
       markFormControlsAsTouched(this.personForm);
       return;
     }
     person = this.personForm.value;
-    this.returnPerson(person);
-  }
-
-  private returnPerson(person: Person): void {
-    this.personEventEmitter.emit(person);
+    this.ref.close(person);
   }
 
   ngOnDestroy(): void {

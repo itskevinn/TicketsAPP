@@ -8,19 +8,21 @@ import {PaginatorModule} from "primeng/paginator";
 import {DialogModule} from "primeng/dialog";
 import {FileUploadModule} from "primeng/fileupload";
 import {ToolbarModule} from "primeng/toolbar";
+import {StaffModule} from "../staff/staff.module";
 
 
 @NgModule({
     declarations: [StudentsInfoComponent],
-  imports: [
-    CommonModule,
-    SharedModule,
-    StudentRoutingModule,
-    PaginatorModule,
-    DialogModule,
-    FileUploadModule,
-    ToolbarModule,
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        StudentRoutingModule,
+        PaginatorModule,
+        DialogModule,
+        FileUploadModule,
+        ToolbarModule,
+        StaffModule,
+    ]
 })
 export class StudentModule {
 }

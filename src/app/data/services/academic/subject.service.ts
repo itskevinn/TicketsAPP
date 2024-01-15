@@ -3,7 +3,7 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {catchError, Observable} from "rxjs";
 import {Response} from "../../models/response.model";
-import {AcademicSubject} from "../../models/academic/academicSubject";
+import {AcademicSubject} from "../../models/academic/academic-subject";
 
 @Injectable({
   providedIn: 'root'

@@ -16,7 +16,6 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {TableModule} from 'primeng/table';
 import {StepsModule} from 'primeng/steps';
 import {DataViewModule} from "primeng/dataview";
-import {EditSubjectComponent} from "./edit-subject/edit-subject.component";
 import {SharedModule} from "../../../shared/shared.module";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {ToolbarModule} from "primeng/toolbar";
@@ -25,7 +24,6 @@ import {ToolbarModule} from "primeng/toolbar";
   declarations: [
     ViewSubjectComponent,
     CreateSubjectComponent,
-    EditSubjectComponent
   ],
   imports: [
     CommonModule,
