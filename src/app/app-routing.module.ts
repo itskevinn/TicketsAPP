@@ -17,8 +17,7 @@ const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadChildren: () =>
-          import('./features/home/home.module').then(m => m.HomeModule)
+        loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule),
       },
       {
         path: 'academic',
@@ -27,7 +26,11 @@ const routes: Routes = [
       },
       {
         path: 'users',
-        loadChildren: () => import('./features/security/user/user.module').then(m => m.UserModule)
+        loadChildren: () => import('./features/security/security.module').then(m => m.SecurityModule),
+      },
+      {
+        path: 'projects',
+        loadChildren: () => import('./features/proyects/proyects.module').then(m => m.ProyectsModule)
       }
     ]
   },

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseUrlV1: 'https://localhost:7055/api/v1',
-  securityBaseUrlV1: 'https://localhost:7193/api/v1',
+  securityBaseUrlV1: 'http://localhost:5276/api/v1',
   academicBaseUrlV1: 'https://localhost:7204/api/v1'
 };
 
