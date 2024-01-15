@@ -1,10 +1,10 @@
 <div class="row mt-3 mb-1">
   <div class="col-4 col-lg-6">
-    <h1><b>Usuarios</b></h1>
+    <h2><b>Usuarios</b></h2>
   </div>
   <div class="col-8 col-lg-6 text-end">
     <button pButton pRipple type="button"  icon="fa-solid fa-plus" class="p-button-raised p-button-primary p-button-text"
-      label="Nuevo usuario "></button>
+      label="Nuevo usuario " (click)="showRegisterModifyStudentDialog('Crear')"></button>
   </div>
 </div>
 <div class="card">
@@ -29,3 +29,52 @@
     </ng-template>
   </p-table>
 </div>
+<p-dialog [(visible)]="showStudentDialog" [header]="action + ' usuario'" [modal]="true" [style]="{width: '550px'}"
+          class="p-fluid">
+  <div [formGroup]="UserForm">
+    <div class="row my-1">
+      <div class="col-6">
+        <input type="text" id="name" required autofocus
+               class="w-100" pInputText placeholder="Primer nombre"
+               formControlName="firstName"/>
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !UserForm.controls['firstName'].valid">El nombre es
+          requerido</small>
+      </div>
+
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Segundo nombre"
+               formControlName="middleName">
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Primer apellido"
+               formControlName="lastName">
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !UserForm.controls['lastName'].valid">El apellido es
+          requerido</small>
+      </div>
+      <div class="col-6">
+        <input class="w-100" type="text" pInputText placeholder="Segundo apellido"
+               formControlName="secondLastName">
+      </div>
+    </div>
+    <div class="row my-2">
+      <div class="col-12">
+        <input class="w-100" type="text" pInputText placeholder="Correo electrónico"
+               formControlName="email">
+        <small class="ng-dirty ng-invalid" *ngIf="submitted && !UserForm.controls['email'].valid">El correo es
+          requerido</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-end">
+    <div class="col-3">
+      <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text"
+              (click)="showStudentDialog=false"></button>
+    </div>
+    <div class="col-3">
+      <button pButton pRipple label="Guardar" icon="pi pi-check" class="p-button-text"></button>
+    </div>
+  </div>
+</p-dialog>

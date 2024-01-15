@@ -5,9 +5,10 @@ import {UsersInfoComponent} from "./users-info/users-info.component";
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '',
-        pathMatch: 'full',
-        component: UsersInfoComponent
+        component: UsersInfoComponent,
+        data: {
+          breadcrumb: 'Usuarios'
+        },
     }
 ];
 
