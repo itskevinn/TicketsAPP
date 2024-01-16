@@ -3,8 +3,6 @@ import {ClassGroup} from "../../../../data/models/academic/class-group";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {CreateClassGroupComponent} from "../../class-group/create-class-group/create-class-group.component";
 import {Subject, takeUntil} from "rxjs";
-import {CREATE, UPDATE} from "../../../../core/constants/actions";
-import {ClassGroupService} from "../../../../data/services/academic/class-group.service";
 import {ActivatedRoute} from "@angular/router";
 import {CustomMessageService} from "../../../../core/service/custom-message.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -23,19 +21,18 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
   subjectId: string = '';
 
   constructor(private dialogService: DialogService, private ref: DynamicDialogRef,
-              private classGroupService: ClassGroupService,
               private formBuilder: FormBuilder,
               private activatedRoute: ActivatedRoute, private messageService: CustomMessageService,
               private subjectService: SubjectService) {
     this.validateRouteParam();
-    this.subjectFormGroup = this.buildClassGroupForm();
+    this.subjectFormGroup = this.buildSubjectGroupForm();
   }
 
   ngOnInit(): void {
     if (this.subjectId && this.subjectId !== 'new') this.getSubjectInfo(this.subjectId);
   }
 
-  private buildClassGroupForm(): FormGroup {
+  private buildSubjectGroupForm(): FormGroup {
     return this.formBuilder.group({
       name: ['', Validators.required],
     });
@@ -48,7 +45,7 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
   }
 
   public showClassGroupDialog(action: string, classGroup?: ClassGroup): void {
-    this.dialogService.open(CreateClassGroupComponent, {
+    this.ref = this.dialogService.open(CreateClassGroupComponent, {
       header: `${action} grupo de clases`,
       width: '40vw',
       contentStyle: {overflow: 'auto'},
@@ -62,10 +59,8 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
       },
     });
 
-    this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      if (!data) return;
-      if (action == CREATE) this.save(data);
-      if (action == UPDATE) this.update(data);
+    this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe(_ => {
+      this.getSubjectInfo(this.subjectId);
     });
   }
 
@@ -75,28 +70,8 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
         return;
       }
       this.subjectFormGroup.controls['name'].setValue(r.data.name);
-      this.classGroups = r.data.classGroups;
+      this.classGroups = r.data.classGroup;
     });
-  }
-
-  private save(classGroup: ClassGroup): void {
-    this.classGroupService
-      .save(classGroup)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((r) => {
-        this.messageService.handleResponse(r);
-      });
-    this.getSubjectInfo(classGroup.subjectId);
-  }
-
-  private update(classGroup: ClassGroup): void {
-    this.classGroupService
-      .update(classGroup)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((r) => {
-        this.messageService.handleResponse(r);
-      });
-    this.getSubjectInfo(classGroup.subjectId);
   }
 
   ngOnDestroy() {

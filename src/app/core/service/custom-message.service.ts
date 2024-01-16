@@ -10,7 +10,7 @@ export class CustomMessageService {
   constructor(private messageService: MessageService) {
   }
 
-  public handleResponse(r: Response<any>): void {
+  public handleResponse(r: Response<any>, showSuccess = true): void {
     if (!r.success) {
       this.messageService.add({
         closable: true,
@@ -21,12 +21,14 @@ export class CustomMessageService {
       });
       return;
     }
-    this.messageService.add({
-      closable: true,
-      key: 'gt',
-      severity: 'success',
-      summary: 'Hecho',
-      detail: r.message,
-    });
+    if (showSuccess) {
+      this.messageService.add({
+        closable: true,
+        key: 'gt',
+        severity: 'success',
+        summary: 'Hecho',
+        detail: r.message,
+      });
+    }
   }
 }

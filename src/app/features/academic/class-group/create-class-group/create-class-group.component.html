@@ -1,5 +1,11 @@
 <div class="row" [formGroup]="classGroupFrom">
   <div class="col-12 my-1">
+    <p-dropdown [options]="teachers" [(ngModel)]="selectedTeacher"
+                emptyMessage="No se encontraron profesores" placeholder="Selecciona un profesor"
+                optionLabel="firstName"
+                [ngModelOptions]="{standalone: true}"></p-dropdown>
+  </div>
+  <div class="col-12 my-1">
     <input
             class="w-100"
             type="text"

@@ -5,7 +5,8 @@ export interface ClassGroup {
   id: string;
   name: string;
   description: string;
-  teacher: Teacher;
+  teacherDto: Teacher;
+  teacherId: string;
   students: Student[];
   subjectId: string;
 }

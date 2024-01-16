@@ -16,7 +16,21 @@ export class TeacherService {
   }
 
   public getAll(): Observable<Response<Teacher[]>> {
-    return this.http.get<Response<Student[]>>(`${this.baseUrl}/Teacher/GetAll`)
+    return this.http.get<Response<Teacher[]>>(`${this.baseUrl}/Teacher/GetAll`)
+      .pipe(catchError(err => {
+        throw err;
+      }));
+  }
+
+  public getById(teacherId: string): Observable<Response<Teacher>> {
+    return this.http.get<Response<Teacher>>(`${this.baseUrl}/Teacher/GetById/${teacherId}`)
+      .pipe(catchError(err => {
+        throw err;
+      }));
+  }
+
+  public getBySubjectId(subjectId: string): Observable<Response<Teacher[]>> {
+    return this.http.get<Response<Teacher[]>>(`${this.baseUrl}/Teacher/GetAll`)
       .pipe(catchError(err => {
         throw err;
       }));
