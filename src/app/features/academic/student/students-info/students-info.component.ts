@@ -1,11 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Student } from '../../../../data/models/academic/student';
-import { Subject, takeUntil } from 'rxjs';
-import { StudentService } from '../../../../data/services/academic/student.service';
-import { MessageService } from 'primeng/api';
-import { CREATE, UPDATE } from '../../../../core/constants/actions';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { CreatePersonComponent } from '../../staff/create-person/create-person.component';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Student} from '../../../../data/models/academic/student';
+import {Subject, takeUntil} from 'rxjs';
+import {StudentService} from '../../../../data/services/academic/student.service';
+import {MessageService} from 'primeng/api';
+import {CREATE, UPDATE} from '../../../../core/constants/actions';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {CreatePersonComponent} from '../../staff/create-person/create-person.component';
+import {CustomMessageService} from "../../../../core/service/custom-message.service";
 
 @Component({
   selector: 'app-students-info',
@@ -22,7 +23,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
 
   constructor(
     private studentService: StudentService,
-    private messageService: MessageService,
+    private messageService: CustomMessageService,
     private dialogService: DialogService
   ) {
     this.initializeCols();
@@ -46,11 +47,11 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
 
   private initializeCols() {
     this.cols = [
-      { field: 'firstName', header: 'Primer Nombre' },
-      { field: 'middleName', header: 'Segundo Nombre' },
-      { field: 'lastName', header: 'Primer Apellido' },
-      { field: 'secondLastName', header: 'Segundo Apellido' },
-      { field: 'email', header: 'Correo electrónico' },
+      {field: 'firstName', header: 'Primer Nombre'},
+      {field: 'middleName', header: 'Segundo Nombre'},
+      {field: 'lastName', header: 'Primer Apellido'},
+      {field: 'secondLastName', header: 'Segundo Apellido'},
+      {field: 'email', header: 'Correo electrónico'},
     ];
   }
 
@@ -69,7 +70,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
     this.ref = this.dialogService.open(CreatePersonComponent, {
       header: `${action} estudiante`,
       width: '50vw',
-      contentStyle: { overflow: 'auto' },
+      contentStyle: {overflow: 'auto'},
       breakpoints: {
         '960px': '75vw',
         '640px': '90vw',
@@ -93,23 +94,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
       .save(student)
       .pipe(takeUntil(this.destroy$))
       .subscribe((r) => {
-        if (!r.success) {
-          this.messageService.add({
-            closable: true,
-            key: 'gt',
-            severity: 'error',
-            summary: 'Ha ocurrido un error',
-            detail: `${r.message}: ${r.exceptionMessage}`,
-          });
-          return;
-        }
-        this.messageService.add({
-          closable: true,
-          key: 'gt',
-          severity: 'success',
-          summary: 'Hecho',
-          detail: r.message,
-        });
+        this.messageService.handleResponse(r);
         this.getStudents();
       });
   }
@@ -119,23 +104,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
       .update(student)
       .pipe(takeUntil(this.destroy$))
       .subscribe((r) => {
-        if (!r.success) {
-          this.messageService.add({
-            closable: true,
-            key: 'gt',
-            severity: 'error',
-            summary: 'Ha ocurrido un error',
-            detail: `${r.message}: ${r.exceptionMessage}`,
-          });
-          return;
-        }
-        this.messageService.add({
-          closable: true,
-          key: 'gt',
-          severity: 'success',
-          summary: 'Hecho',
-          detail: r.message,
-        });
+        this.messageService.handleResponse(r);
         this.getStudents();
       });
   }

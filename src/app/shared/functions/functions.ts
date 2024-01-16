@@ -1,5 +1,6 @@
 import {FormGroup} from "@angular/forms";
 import {Subscription} from "rxjs";
+import {Response} from "../../data/models/response.model";
 
 /**
  * Esta función coloca los valores

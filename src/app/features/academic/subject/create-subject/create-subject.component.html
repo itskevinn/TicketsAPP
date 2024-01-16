@@ -3,14 +3,22 @@
     <a class="btn btn-custom" routerLink="../"><i class="fa fa-long-arrow-left"></i></a>
   </div>
 </div>
-<div class="row card-body">
-  <div class="col-12 col-md-4">
+<div [formGroup]="subjectFormGroup">
+  <div class="row my-3">
+    <div class="col-12">
+      <input class="input-borderless w-100" type="text" pInputText formControlName="name"
+             placeholder="Nombre de Asignatura"/>
+    </div>
+  </div>
+</div>
+<div class="row card-body justify-content-between">
+  <div class="col-12 col-md-4 card">
     <h3>Grupos</h3>
     <p-dataView [value]="classGroups" layout="grid" emptyMessage=" ">
       <ng-template let-groups pTemplate="gridItem">
         <div class="row">
           <div *ngFor="let group of groups" class="col-6 md:col-4">
-            <div class="data-view-card">
+            <div class="data-view-card" (dblclick)="showClassGroupDialog('Editar',group)">
               <div class="card m-3 border-1 surface-border" routerLink='subject/edit'>
                 <div class="flex flex-column align-items-center text-center">
                   <div class="text-2xl font-bold">{{group.name}}</div>
@@ -18,7 +26,7 @@
               </div>
             </div>
           </div>
-          <div class="data-view-card" (click)="showClassGroupDialog()">
+          <div class="data-view-card" (click)="showClassGroupDialog('Crear')">
             <div class="card m-3 border-1 surface-border">
               <div class="d-inline text-center">
                 <em class="pi pi-plus text-success"></em>
@@ -30,5 +38,6 @@
       </ng-template>
     </p-dataView>
   </div>
+  <div class="col-12 col-md-7"></div>
 </div>
 

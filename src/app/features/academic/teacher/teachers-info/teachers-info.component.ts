@@ -1,11 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Teacher } from '../../../../data/models/academic/teacher';
-import { TeacherService } from '../../../../data/services/academic/teacher.service';
-import { Subject, takeUntil } from 'rxjs';
-import { MessageService } from 'primeng/api';
-import { CREATE, UPDATE } from '../../../../core/constants/actions';
-import { CreatePersonComponent } from '../../staff/create-person/create-person.component';
-import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Teacher} from '../../../../data/models/academic/teacher';
+import {TeacherService} from '../../../../data/services/academic/teacher.service';
+import {Subject, takeUntil} from 'rxjs';
+import {CREATE, UPDATE} from '../../../../core/constants/actions';
+import {CreatePersonComponent} from '../../staff/create-person/create-person.component';
+import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
+import {CustomMessageService} from "../../../../core/service/custom-message.service";
 
 @Component({
   selector: 'app-teachers-info',
@@ -22,7 +22,7 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
 
   constructor(
     private teacherService: TeacherService,
-    private messageService: MessageService,
+    private messageService: CustomMessageService,
     private dialogService: DialogService
   ) {
     this.initializeCols();
@@ -46,11 +46,11 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
 
   private initializeCols() {
     this.cols = [
-      { field: 'firstName', header: 'Primer Nombre' },
-      { field: 'middleName', header: 'Segundo Nombre' },
-      { field: 'lastName', header: 'Primer Apellido' },
-      { field: 'secondLastName', header: 'Segundo Apellido' },
-      { field: 'email', header: 'Correo electrónico' },
+      {field: 'firstName', header: 'Primer Nombre'},
+      {field: 'middleName', header: 'Segundo Nombre'},
+      {field: 'lastName', header: 'Primer Apellido'},
+      {field: 'secondLastName', header: 'Segundo Apellido'},
+      {field: 'email', header: 'Correo electrónico'},
     ];
   }
 
@@ -69,7 +69,7 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
     this.ref = this.dialogService.open(CreatePersonComponent, {
       header: `${action} profesor`,
       width: '50vw',
-      contentStyle: { overflow: 'auto' },
+      contentStyle: {overflow: 'auto'},
       breakpoints: {
         '960px': '75vw',
         '640px': '90vw',
@@ -93,23 +93,7 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
       .save(teacher)
       .pipe(takeUntil(this.destroy$))
       .subscribe((r) => {
-        if (!r.success) {
-          this.messageService.add({
-            closable: true,
-            key: 'gt',
-            severity: 'error',
-            summary: 'Ha ocurrido un error',
-            detail: `${r.message}: ${r.exceptionMessage}`,
-          });
-          return;
-        }
-        this.messageService.add({
-          closable: true,
-          key: 'gt',
-          severity: 'success',
-          summary: 'Hecho',
-          detail: r.message,
-        });
+        this.messageService.handleResponse(r);
         this.getTeachers();
       });
   }
@@ -119,23 +103,7 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
       .update(teacher)
       .pipe(takeUntil(this.destroy$))
       .subscribe((r) => {
-        if (!r.success) {
-          this.messageService.add({
-            closable: true,
-            key: 'gt',
-            severity: 'error',
-            summary: 'Ha ocurrido un error',
-            detail: `${r.message}: ${r.exceptionMessage}`,
-          });
-          return;
-        }
-        this.messageService.add({
-          closable: true,
-          key: 'gt',
-          severity: 'success',
-          summary: 'Hecho',
-          detail: r.message,
-        });
+        this.messageService.handleResponse(r);
         this.getTeachers();
       });
   }

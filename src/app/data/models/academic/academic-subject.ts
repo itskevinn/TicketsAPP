@@ -1,12 +1,7 @@
+import {ClassGroup} from "./class-group";
+
 export interface AcademicSubject {
-    id?: string;
-    code?: string;
-    name?: string;
-    description?: string;
-    price?: number;
-    quantity?: number;
-    inventoryStatus?: string;
-    category?: string;
-    image?: string;
-    rating?: number;
+  id: string;
+  name: string;
+  classGroups: ClassGroup[];
 }

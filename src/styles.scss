@@ -64,6 +64,14 @@ body {
   }
 }
 
-.p-breadcrumb-list{
+.p-breadcrumb-list {
   margin-bottom: 0;
+}
+
+.input-borderless {
+  border: none transparent !important;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 0 0 0 !important;
+  font-size: 2rem !important;
 }

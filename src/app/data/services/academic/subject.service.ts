@@ -21,6 +21,13 @@ export class SubjectService {
       }));
   }
 
+  public getById(subjectId: string): Observable<Response<AcademicSubject>> {
+    return this.http.get<Response<AcademicSubject>>(`${this.baseUrl}/Subject/GetById/${subjectId}`)
+      .pipe(catchError(err => {
+        throw err;
+      }));
+  }
+
   public update(student: AcademicSubject): Observable<Response<AcademicSubject[]>> {
     return this.http.put<Response<AcademicSubject[]>>(`${this.baseUrl}/Subject/Update`, student)
       .pipe(catchError(err => {

@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
+import {RouterModule} from '@angular/router';
 import {ViewSubjectComponent} from './view-subject/view-subject.component';
 import {CreateSubjectComponent} from './create-subject/create-subject.component';
 
@@ -12,10 +12,10 @@ const routes = [
     }
   },
   {
-    path: 'create',
+    path: ':subjectId',
     component: CreateSubjectComponent,
     data: {
-      breadcrumb: 'Crear Asignatura'
+      breadcrumb: 'Gestionar Asignatura'
     }
   }
 ];
