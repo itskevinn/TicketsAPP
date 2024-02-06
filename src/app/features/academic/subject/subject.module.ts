@@ -8,6 +8,7 @@ import {DynamicDialogRef} from "primeng/dynamicdialog";
 import {SubjectRoutingModule} from "./subject-routing.module";
 import {CreateSubjectComponent} from "./create-subject/create-subject.component";
 import {ClassGroupModule} from "../class-group/class-group.module";
+import {StudentModule} from "../student/student.module";
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import {ClassGroupModule} from "../class-group/class-group.module";
     CommonModule,
     SharedModule,
     ClassGroupModule,
-    SubjectRoutingModule
+    SubjectRoutingModule,
+    StudentModule
   ],
   providers: [ConfirmationService, MessageService, DynamicDialogRef]
 })

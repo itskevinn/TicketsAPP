@@ -16,7 +16,6 @@ export class TeachersInfoComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   teachers: Teacher[] = [];
   action: string = '';
-  teacher: Teacher = null!;
   cols: any[] = [];
   ref: DynamicDialogRef | undefined;
 

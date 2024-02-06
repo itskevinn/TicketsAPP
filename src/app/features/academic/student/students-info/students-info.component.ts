@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {Student} from '../../../../data/models/academic/student';
 import {Subject, takeUntil} from 'rxjs';
 import {StudentService} from '../../../../data/services/academic/student.service';
-import {MessageService} from 'primeng/api';
 import {CREATE, UPDATE} from '../../../../core/constants/actions';
 import {DialogService, DynamicDialogRef} from 'primeng/dynamicdialog';
 import {CreatePersonComponent} from '../../staff/create-person/create-person.component';
@@ -20,6 +19,11 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
   student: Student = null!;
   cols: any[] = [];
   ref: DynamicDialogRef | undefined;
+  @Input() showToolBar: boolean = false;
+  @Input() isRowSelectable: boolean = false;
+  @Input() classGroupId: string | undefined;
+  @Input() selectedStudents: Student[] = [];
+  @Output() selectedStudentsOutput: EventEmitter<Student[]> = new EventEmitter<Student[]>();
 
   constructor(
     private studentService: StudentService,
@@ -45,7 +49,11 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  private initializeCols() {
+  public studentExistsInGroup(student: Student): boolean {
+    return this.selectedStudents.find(s => s.id == student.id) != null;
+  }
+
+  private initializeCols(): void {
     this.cols = [
       {field: 'firstName', header: 'Primer Nombre'},
       {field: 'middleName', header: 'Segundo Nombre'},
@@ -56,10 +64,10 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
   }
 
   public delete(student: Student): void {
-    //TODO: eliminar profesor
+    //TODO: eliminar estudiante
   }
 
-  public handleFile(file: any) {
+  public handleFile(file: any): void {
     console.log(file);
   }
 
@@ -109,11 +117,12 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.ref) {
       this.ref.close();
     }
     this.destroy$.next();
     this.destroy$.complete();
+    this.selectedStudentsOutput.emit(this.selectedStudents);
   }
 }

@@ -29,13 +29,6 @@ export class TeacherService {
       }));
   }
 
-  public getBySubjectId(subjectId: string): Observable<Response<Teacher[]>> {
-    return this.http.get<Response<Teacher[]>>(`${this.baseUrl}/Teacher/GetAll`)
-      .pipe(catchError(err => {
-        throw err;
-      }));
-  }
-
   public update(teacher: Teacher): Observable<Response<Teacher[]>> {
     return this.http.put<Response<Teacher[]>>(`${this.baseUrl}/Teacher/Update`, teacher)
       .pipe(catchError(err => {

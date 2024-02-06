@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-dialog-confirm-footer',
@@ -10,11 +10,7 @@ export class DialogConfirmFooterComponent {
   @Input() confirmLabel: string = '';
   @Input() cancelLabel: string = '';
 
-  public confirm(): void {
-    this.result.emit(true);
-  }
-
-  public cancel(): void {
-    this.result.emit(false);
+  public emitResult(result: boolean): void {
+    this.result.emit(result);
   }
 }

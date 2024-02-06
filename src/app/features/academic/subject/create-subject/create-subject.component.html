@@ -1,43 +1,50 @@
 <div class="row">
-  <div class="col-md-4">
-    <a class="btn btn-custom" routerLink="../"><i class="fa fa-long-arrow-left"></i></a>
-  </div>
+    <div class="col-md-4">
+        <a class="btn btn-custom" routerLink="../"><i class="fa fa-long-arrow-left"></i></a>
+    </div>
 </div>
 <div [formGroup]="subjectFormGroup">
-  <div class="row my-3">
-    <div class="col-12">
-      <input class="input-borderless w-100" type="text" pInputText formControlName="name"
-             placeholder="Nombre de Asignatura"/>
+    <div class="row my-3">
+        <div class="col-12">
+            <input class="input-borderless w-100" type="text" pInputText formControlName="name"
+                   placeholder="Nombre de Asignatura"/>
+        </div>
     </div>
-  </div>
 </div>
 <div class="row card-body justify-content-between">
-  <div class="col-12 col-md-4 card">
-    <h3>Grupos</h3>
-    <p-dataView [value]="classGroups" layout="grid" emptyMessage=" ">
-      <ng-template let-groups pTemplate="gridItem">
-        <div class="row">
-          <div *ngFor="let group of groups" class="col-12 col-md-12">
-            <div class="data-view-card" (dblclick)="showClassGroupDialog('Editar',group)">
-              <div class="card m-3 border-1 surface-border">
-                <div class="flex flex-column align-items-center text-center">
-                  <div class="text-2xl font-bold">{{group.name}}</div>
+    <div class="col-12 col-md-4 card">
+        <h3>Grupos</h3>
+        <p-dataView [value]="classGroups" layout="grid" emptyMessage=" ">
+            <ng-template let-groups pTemplate="gridItem">
+                <div class="row">
+                    <div *ngFor="let group of groups; index as i" class="col-12 col-md-12">
+                        <div class="data-view-card" (click)="showClassGroupStudents(group)"
+                             (dblclick)="showClassGroupDialog(UPDATE,group,i)">
+                            <div class="card m-3 border-1 surface-border">
+                                <div class="flex flex-column align-items-center text-center">
+                                    <div class="row text-2xl font-bold">{{group.name}}</div>
+                                    <div class="row text-2xl font-bold"> {{group.teacher.fullName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="data-view-card" (click)="showClassGroupDialog(CREATE)">
+                        <div class="card m-3 border-1 surface-border">
+                            <div class="d-inline text-center">
+                                <em class="pi pi-plus text-success"></em>
+                                <div class="text-2xl font-bold">Nuevo grupo</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div class="data-view-card" (click)="showClassGroupDialog('Crear')">
-            <div class="card m-3 border-1 surface-border">
-              <div class="d-inline text-center">
-                <em class="pi pi-plus text-success"></em>
-                <div class="text-2xl font-bold">Nuevo grupo</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-    </p-dataView>
-  </div>
-  <div class="col-12 col-md-7"></div>
+            </ng-template>
+        </p-dataView>
+    </div>
+    <div class="col-12 col-md-7">
+        <app-students-info [classGroupId]="selectedClassGroupId"
+                           (selectedStudentsOutput)="handleStudentsSelection($event)"
+                           [selectedStudents]="selectedStudents"
+                           [isRowSelectable]="true" [showToolBar]="false"></app-students-info>
+    </div>
 </div>
 

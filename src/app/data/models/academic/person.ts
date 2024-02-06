@@ -4,5 +4,6 @@ export interface Person {
   middleName: string,
   lastName: string,
   secondLastName: string,
-  email: string
+  email: string,
+  fullName: string
 }

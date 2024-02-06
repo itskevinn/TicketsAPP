@@ -10,11 +10,11 @@ import {Response} from "../../data/models/response.model";
  * @param data - Entidad a colocar en el form
  * */
 export function setFormValues<T>(form: FormGroup, data: any): void {
-  Object.keys(data).forEach(name => {
-    if (form.controls[name]) {
-      form.controls[name].patchValue(data[name], {onlySelf: true});
-    }
-  });
+    Object.keys(data).forEach(name => {
+        if (form.controls[name]) {
+            form.controls[name].patchValue(data[name], {onlySelf: true});
+        }
+    });
 }
 
 /**
@@ -25,8 +25,8 @@ export function setFormValues<T>(form: FormGroup, data: any): void {
  * @param form - Formulario a tocar campos
  * */
 export function markFormControlsAsDirty(form: FormGroup): void {
-  const controls = form.controls;
-  Object.keys(controls).forEach(controlName => controls[controlName].markAsDirty());
+    const controls = form.controls;
+    Object.keys(controls).forEach(controlName => controls[controlName].markAsDirty());
 }
 
 /**
@@ -37,8 +37,8 @@ export function markFormControlsAsDirty(form: FormGroup): void {
  * @param form - Formulario a tocar campos
  * */
 export function markFormControlsAsTouched(form: FormGroup): void {
-  const controls = form.controls;
-  Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
+    const controls = form.controls;
+    Object.keys(controls).forEach(controlName => controls[controlName].markAsTouched());
 }
 
 /**
@@ -48,9 +48,9 @@ export function markFormControlsAsTouched(form: FormGroup): void {
  * @param subscriptions - Suscripciones a desuscribir
  * */
 export function unsubscribeAllSubscriptions(subscriptions: Subscription[]) {
-  subscriptions.forEach(s => {
-    s.unsubscribe();
-  });
+    subscriptions.forEach(s => {
+        s.unsubscribe();
+    });
 }
 
 /**
@@ -61,7 +61,7 @@ export function unsubscribeAllSubscriptions(subscriptions: Subscription[]) {
 const MAX_WIDTH_PHONE = 600;
 
 export function getDialogWidth(desktopWidth = '45%'): string {
-  return screen.width < MAX_WIDTH_PHONE ? '100vw' : desktopWidth;
+    return screen.width < MAX_WIDTH_PHONE ? '100vw' : desktopWidth;
 }
 
 /**
@@ -70,6 +70,6 @@ export function getDialogWidth(desktopWidth = '45%'): string {
  * @returns boolean
  */
 export function isNullOrUndefined(value: any) {
-  return value === null || value === undefined;
+    return value === null || value === undefined;
 }
 

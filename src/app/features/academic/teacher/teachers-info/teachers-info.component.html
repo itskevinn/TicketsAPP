@@ -33,6 +33,7 @@
     ></button>
   </ng-template>
 </p-toolbar>
+  
 <p-table
   #teachersDt
   [value]="teachers"
@@ -43,7 +44,7 @@
   [rowsPerPageOptions]="[10, 25, 50]"
   [paginator]="true"
   [columns]="cols"
-  currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} registros"
+  currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} profesores"
   [globalFilterFields]="[
     'firstName',
     'middleName',
@@ -57,7 +58,7 @@
       <div
         class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
       >
-        <h5 class="m-0">Manage Products</h5>
+        <h5 class="m-0">Gestionar Profesores</h5>
         <span class="block mt-2 md:mt-0 p-input-icon-left">
           <i class="pi pi-search"></i>
           <input

@@ -1,16 +1,16 @@
 <div class="flex w-full justify-content-end my-3">
   <p-button
-    [label]="cancelLabel"
-    (click)="cancel()"
-    [text]="true"
-    styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"
-    class="w-full"
+          [label]="cancelLabel"
+          (click)="emitResult(false)"
+          [text]="true"
+          styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"
+          class="w-full"
   ></p-button>
   <p-button
-    [label]="confirmLabel"
-    (click)="confirm()"
-    [text]="true"
-    styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"
-    class="w-full"
+          [label]="confirmLabel"
+          (click)="emitResult(true)"
+          [text]="true"
+          styleClass="w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"
+          class="w-full"
   ></p-button>
 </div>

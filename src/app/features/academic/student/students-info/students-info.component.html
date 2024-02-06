@@ -1,127 +1,137 @@
 <h3>Estudiantes</h3>
-<p-toolbar styleClass="mb-4">
-  <ng-template pTemplate="left">
-    <div class="my-2">
-      <button
-        (click)="showRegisterModifyStudentDialog('Crear')"
-        class="p-button-success mr-2"
-        icon="pi pi-plus"
-        label="Nuevo"
-        pButton
-        pRipple
-      ></button>
-    </div>
-  </ng-template>
+<ng-container *ngIf="showToolBar">
+    <p-toolbar styleClass="mb-4">
+        <ng-template pTemplate="left">
+            <div class="my-2">
+                <button
+                        (click)="showRegisterModifyStudentDialog('Crear')"
+                        class="p-button-success mr-2"
+                        icon="pi pi-plus"
+                        label="Nuevo"
+                        pButton
+                        pRipple
+                ></button>
+            </div>
+        </ng-template>
 
-  <ng-template pTemplate="right">
-    <p-fileUpload
-      (onUpload)="handleFile($event)"
-      [auto]="true"
-      [maxFileSize]="1000"
-      accept="text/csv"
-      chooseLabel="Importar"
-      class="mr-1 inline-block"
-      mode="basic"
-    ></p-fileUpload>
-    <button
-      (click)="studentsDt.exportCSV()"
-      class="p-button-warning mx-1"
-      icon="pi pi-upload"
-      label="Exportar"
-      pButton
-      pRipple
-    ></button>
-  </ng-template>
-</p-toolbar>
+        <ng-template pTemplate="right">
+            <p-fileUpload
+                    (onUpload)="handleFile($event)"
+                    [auto]="true"
+                    [maxFileSize]="1000"
+                    accept="text/csv"
+                    chooseLabel="Importar"
+                    class="mr-1 inline-block"
+                    mode="basic"
+            ></p-fileUpload>
+            <button
+                    (click)="studentsDt.exportCSV()"
+                    class="p-button-warning mx-1"
+                    icon="pi pi-upload"
+                    label="Exportar"
+                    pButton
+                    pRipple
+            ></button>
+        </ng-template>
+    </p-toolbar>
+</ng-container>
 <p-table
-  #studentsDt
-  [columns]="cols"
-  [globalFilterFields]="[
+    #studentsDt
+    [columns]="cols"
+    [globalFilterFields]="[
     'firstName',
     'middleName',
     'lastName',
     'secondLastName'
   ]"
-  [paginator]="true"
-  [rowsPerPageOptions]="[10, 25, 50]"
-  [rows]="10"
-  [showCurrentPageReport]="true"
-  [value]="students"
-  currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} registros"
-  dataKey="id"
-  exportFilename="Profesores"
-  responsiveLayout="scroll"
-  styleClass="p-datatable-gridlines"
+    [(selection)]="selectedStudents"
+    [paginator]="true"
+    [rowsPerPageOptions]="[10, 25, 50]"
+    [rows]="10"
+    [showCurrentPageReport]="true"
+    [value]="students"
+    [rowSelectable]="isRowSelectable"
+    currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} estudiantes"
+    dataKey="id"
+    exportFilename="Estudiantes"
+    responsiveLayout="scroll"
+    styleClass="p-datatable-gridlines"
 >
-  <div class="row">
-    <ng-template pTemplate="caption">
-      <div
-        class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
-      >
-        <h5 class="m-0">Manage Products</h5>
-        <span class="block mt-2 md:mt-0 p-input-icon-left">
+    <div class="row">
+        <ng-template pTemplate="caption">
+            <div
+                    class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+            >
+                <h5 class="m-0">Gestionar estudiantes</h5>
+                <span class="block mt-2 md:mt-0 p-input-icon-left">
           <i class="pi pi-search"></i>
           <input
-            class="w-full sm:w-auto"
-            pInputText
-            placeholder="Buscar..."
-            type="text"
+                  class="w-full sm:w-auto"
+                  pInputText
+                  placeholder="Buscar..."
+                  type="text"
           />
         </span>
-      </div>
-    </ng-template>
-  </div>
+            </div>
+        </ng-template>
+    </div>
 
-  <ng-template pTemplate="header">
-    <tr>
-      <th pSortableColumn="firstName" scope="col">
-        Primer Nombre
-        <p-sortIcon field="code"></p-sortIcon>
-      </th>
-      <th pSortableColumn="middleName" scope="col">
-        Segundo Nombre
-        <p-sortIcon field="middleName"></p-sortIcon>
-      </th>
-      <th pSortableColumn="lastName" scope="col">
-        Primer Apellido
-        <p-sortIcon field="lastName"></p-sortIcon>
-      </th>
-      <th pSortableColumn="secondLastName" scope="col">
-        Segundo Apellido
-        <p-sortIcon field="secondLastName"></p-sortIcon>
-      </th>
-      <th pSortableColumn="email" scope="col">
-        Correo electrónico
-        <p-sortIcon field="email"></p-sortIcon>
-      </th>
-      <th scope="col"></th>
-    </tr>
-  </ng-template>
-  <ng-template let-student pTemplate="body">
-    <tr>
-      <td>{{ student.firstName }}</td>
-      <td>{{ student.middleName }}</td>
-      <td>{{ student.lastName }}</td>
-      <td>{{ student.secondLastName }}</td>
-      <td>{{ student.email }}</td>
-      <td>
-        <div class="flex">
-          <button
-            (click)="showRegisterModifyStudentDialog('Editar', student)"
-            class="p-button-rounded p-button-success mx-1"
-            icon="pi pi-pencil"
-            pButton
-            pRipple
-          ></button>
-          <button
-            (click)="delete(student)"
-            class="p-button-rounded p-button-danger mx-1"
-            icon="pi pi-trash"
-            pButton
-            pRipple
-          ></button>
-        </div>
-      </td>
-    </tr>
-  </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th scope="col" style="width: 4rem">
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+            </th>
+            <th pSortableColumn="firstName" scope="col">
+                Primer Nombre
+                <p-sortIcon field="code"></p-sortIcon>
+            </th>
+            <th pSortableColumn="middleName" scope="col">
+                Segundo Nombre
+                <p-sortIcon field="middleName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="lastName" scope="col">
+                Primer Apellido
+                <p-sortIcon field="lastName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="secondLastName" scope="col">
+                Segundo Apellido
+                <p-sortIcon field="secondLastName"></p-sortIcon>
+            </th>
+            <th pSortableColumn="email" scope="col">
+                Correo electrónico
+                <p-sortIcon field="email"></p-sortIcon>
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </ng-template>
+    <ng-template let-student pTemplate="body">
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="student" [disabled]="studentExistsInGroup(student)"></p-tableCheckbox>
+            </td>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.middleName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.secondLastName }}</td>
+            <td>{{ student.email }}</td>
+            <td>
+                <div class="flex">
+                    <button
+                            (click)="showRegisterModifyStudentDialog('Editar', student)"
+                            class="p-button-rounded p-button-success mx-1"
+                            icon="pi pi-pencil"
+                            pButton
+                            pRipple
+                    ></button>
+                    <button
+                            (click)="delete(student)"
+                            class="p-button-rounded p-button-danger mx-1"
+                            icon="pi pi-trash"
+                            pButton
+                            pRipple
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
 </p-table>

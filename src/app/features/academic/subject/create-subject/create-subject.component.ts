@@ -4,9 +4,11 @@ import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {CreateClassGroupComponent} from "../../class-group/create-class-group/create-class-group.component";
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
-import {CustomMessageService} from "../../../../core/service/custom-message.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SubjectService} from "../../../../data/services/academic/subject.service";
+import {setFormValues} from "../../../../shared/functions/functions";
+import {CREATE, UPDATE} from "../../../../core/constants/actions";
+import {Student} from "../../../../data/models/academic/student";
 
 @Component({
   selector: 'app-create-subject',
@@ -17,12 +19,17 @@ import {SubjectService} from "../../../../data/services/academic/subject.service
 export class CreateSubjectComponent implements OnInit, OnDestroy {
   classGroups: ClassGroup[] = [];
   subjectFormGroup: FormGroup;
-  private destroy$: Subject<void> = new Subject<void>();
+  selectedStudents: Student[] = [];
+  selectedClassGroupId: string = '';
   subjectId: string = '';
+  action: string = CREATE;
+  protected readonly CREATE = CREATE;
+  protected readonly UPDATE = UPDATE;
+  private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private dialogService: DialogService, private ref: DynamicDialogRef,
               private formBuilder: FormBuilder,
-              private activatedRoute: ActivatedRoute, private messageService: CustomMessageService,
+              private activatedRoute: ActivatedRoute,
               private subjectService: SubjectService) {
     this.validateRouteParam();
     this.subjectFormGroup = this.buildSubjectGroupForm();
@@ -44,7 +51,10 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  public showClassGroupDialog(action: string, classGroup?: ClassGroup): void {
+  public showClassGroupDialog(action: string, classGroup?: ClassGroup, index?: number): void {
+    if (classGroup && action == UPDATE && index != undefined)
+      classGroup.subjectId = this.subjectId;
+
     this.ref = this.dialogService.open(CreateClassGroupComponent, {
       header: `${action} grupo de clases`,
       width: '40vw',
@@ -55,23 +65,37 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
       },
       data: {
         action: action,
-        classGroup: classGroup,
+        subjectId: this.subjectId,
+        classGroup: classGroup
       },
     });
 
-    this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe(_ => {
-      this.getSubjectInfo(this.subjectId);
+    this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe(r => {
+      if (index) {
+        this.classGroups.splice(index, 1, {...this.classGroups[index], ...r});
+      } else if (r && action == CREATE) {
+        this.classGroups.push(r);
+      }
     });
   }
 
+  public showClassGroupStudents(classGroup: ClassGroup): void {
+    this.selectedClassGroupId = classGroup.id;
+    this.selectedStudents = classGroup.students;
+  }
+
   private getSubjectInfo(subjectId: string): void {
+    this.action = UPDATE;
     this.subjectService.getById(subjectId).pipe(takeUntil(this.destroy$)).subscribe(r => {
-      if (!r.success) {
-        return;
-      }
-      this.subjectFormGroup.controls['name'].setValue(r.data.name);
+      if (!r.success) return;
+
+      setFormValues(this.subjectFormGroup, r.data)
       this.classGroups = r.data.classGroup;
     });
+  }
+
+  public handleStudentsSelection(students: Student[]): void {
+    this.selectedStudents = students;
   }
 
   ngOnDestroy() {
@@ -81,4 +105,5 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
 }

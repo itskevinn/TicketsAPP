@@ -12,17 +12,20 @@ import {StaffModule} from "../staff/staff.module";
 
 
 @NgModule({
-    declarations: [StudentsInfoComponent],
-    imports: [
-        CommonModule,
-        SharedModule,
-        StudentRoutingModule,
-        PaginatorModule,
-        DialogModule,
-        FileUploadModule,
-        ToolbarModule,
-        StaffModule,
-    ]
+  declarations: [StudentsInfoComponent],
+  exports: [
+    StudentsInfoComponent
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    StudentRoutingModule,
+    PaginatorModule,
+    DialogModule,
+    FileUploadModule,
+    ToolbarModule,
+    StaffModule,
+  ]
 })
 export class StudentModule {
 }
