@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute) {
     this.loginForm = this.buildForm();
     if (this.authService.currentUserValue) {
-      this.router.navigate(['/home']).then(_ => console.trace());
+      this.router.navigate(['/home']).then(r => console.log(r));
     }
 
   }

@@ -1,39 +1,35 @@
-// .card {
-//     height: 490px; 
-//     overflow-y: auto; 
-//     @media (max-width: 768px) {
-//             /* Ajustes para pantallas más pequeñas */
-//     }
-// }
+
 .btn-custom {
-    background-color: rgb(112, 182, 32);
-    color: #ffffff;
+  background-color: rgb(112, 182, 32);
+  color: #ffffff;
 }
 
 .btn-custom:hover {
-    background-color: rgb(142, 197, 79);
-    color: #ffffff;
+  background-color: rgb(142, 197, 79);
+  color: #ffffff;
 }
-.card {
-    max-height: 80vh; // Establece una altura máxima
-    overflow-y: auto; // Agrega desplazamiento vertical si el contenido es demasiado grande
-    margin: 0 auto; // Centra la tarjeta horizontalmente
-    padding: 20px; // Añade relleno al contenido de la tarjeta
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 
-    @media (max-width: 768px) {
-        max-height: none; // Elimina la altura máxima en pantallas más pequeñas
-    }
+.card {
+  max-height: 80vh;
+  overflow-y: auto;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    max-height: none;
+  }
 }
+
 .card::-webkit-scrollbar {
-    width: 8px; // Ancho de la barra de desplazamiento
+  width: 8px;
 }
 
 .card::-webkit-scrollbar-thumb {
-    background-color: #ccc; // Color de fondo de la barra de desplazamiento
-    border-radius: 4px; // Borde redondeado
+  background-color: #ccc;
+  border-radius: 4px;
 }
 
 .card::-webkit-scrollbar-thumb:hover {
-    background-color: #aaa; // Cambia el color al pasar el mouse sobre la barra
+  background-color: #aaa;
 }

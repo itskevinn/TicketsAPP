@@ -39,8 +39,6 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.dialogInstance);
-    console.log(this.dialogInstance?.data);
     this.validatePerson();
   }
 

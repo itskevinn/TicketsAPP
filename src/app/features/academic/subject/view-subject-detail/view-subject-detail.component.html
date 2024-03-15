@@ -1,14 +1,12 @@
-<h3>Asignaturas</h3>
+<h3>Grupos de {{subject?.name}}</h3>
 <p-dataView
     #dv
-    [value]="subjects"
+    [value]="classGroups"
     [paginator]="true"
     [rows]="9"
     filterBy="name"
-    [sortField]="sortField"
-    [sortOrder]="sortOrder"
     layout="grid"
-    emptyMessage="No hay asignaturas registradas"
+    emptyMessage="No hay grupos para esta asignatura registrados"
 >
     <ng-template pTemplate="header">
         <div class="d-flex justify-content-between gap-2">
@@ -18,7 +16,7 @@
                     label="Nuevo"
                     icon="pi pi-plus"
                     class="p-button-success mr-2"
-                    routerLink="new"
+                    (click)="showClassGroupDialog(CREATE)"
             ></button>
 
             <span class="p-input-icon-left w-25">
@@ -33,16 +31,16 @@
       </span>
         </div>
     </ng-template>
-    <ng-template let-subjects pTemplate="gridItem">
+    <ng-template let-groups pTemplate="gridItem">
         <div class="row">
-            <div class="col-6 md:col-4" *ngFor="let subject of subjects">
+            <div class="col-6 md:col-4" *ngFor="let group of groups">
                 <div class="data-view-card">
                     <div
                             class="card m-3 border-1 surface-border"
-                            [routerLink]="[subject.id, 'groups']"
+                            [routerLink]="group.id"
                     >
                         <div class="flex flex-column align-items-center text-center">
-                            <div class="text-2xl font-bold">{{ subject.name }}</div>
+                            <div class="text-2xl font-bold">{{ group.name }}</div>
                         </div>
                     </div>
                 </div>

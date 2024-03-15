@@ -19,8 +19,8 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
   student: Student = null!;
   cols: any[] = [];
   ref: DynamicDialogRef | undefined;
-  @Input() showToolBar: boolean = false;
-  @Input() isRowSelectable: boolean = false;
+  @Input() showToolBar: boolean = true;
+  @Input() showRowSelection: boolean = false;
   @Input() classGroupId: string | undefined;
   @Input() selectedStudents: Student[] = [];
   @Output() selectedStudentsOutput: EventEmitter<Student[]> = new EventEmitter<Student[]>();
@@ -31,6 +31,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
     private dialogService: DialogService
   ) {
     this.initializeCols();
+    this.isRowSelectable = this.isRowSelectable.bind(this);
   }
 
   ngOnInit(): void {
@@ -46,11 +47,17 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
           return;
         }
         this.students = r.data;
+        console.log(r);
+        
       });
   }
 
+  public isRowSelectable(event: any): boolean {
+    return !this.studentExistsInGroup(event.data);
+  }
+
   public studentExistsInGroup(student: Student): boolean {
-    return this.selectedStudents.find(s => s.id == student.id) != null;
+    return true;
   }
 
   private initializeCols(): void {
@@ -85,7 +92,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
       },
       data: {
         action: action,
-        student: student,
+        person: student,
       },
     });
 

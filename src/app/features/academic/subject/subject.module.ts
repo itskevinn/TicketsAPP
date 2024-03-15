@@ -9,18 +9,22 @@ import {SubjectRoutingModule} from "./subject-routing.module";
 import {CreateSubjectComponent} from "./create-subject/create-subject.component";
 import {ClassGroupModule} from "../class-group/class-group.module";
 import {StudentModule} from "../student/student.module";
+import {ViewSubjectDetailComponent} from "./view-subject-detail/view-subject-detail.component";
+import {FileUploadModule} from "primeng/fileupload";
 
 @NgModule({
   declarations: [
     ViewSubjectComponent,
-    CreateSubjectComponent
+    CreateSubjectComponent,
+    ViewSubjectDetailComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     ClassGroupModule,
     SubjectRoutingModule,
-    StudentModule
+    StudentModule,
+    FileUploadModule
   ],
   providers: [ConfirmationService, MessageService, DynamicDialogRef]
 })

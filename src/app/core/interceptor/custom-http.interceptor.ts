@@ -24,7 +24,7 @@ export class CustomHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let currentUser = this.authService.currentUserValue;
-    if (currentUser && currentUser.token) {
+    if (currentUser?.token) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${currentUser.token}`
@@ -49,10 +49,10 @@ export class CustomHttpInterceptor implements HttpInterceptor {
               severity: 'error',
               detail: "Usuario y/o contraseña incorrectos"
             });
-            this.router.navigateByUrl('/login').then(_ => console.trace());
+            this.router.navigateByUrl('/login').then(r => console.log(r));
           }
           if (err.status >= 400 && err.status < 404 || err.status >= 405 || err.statusText == 'INTERNAL_SERVER_ERROR') {
-            if (err.error && err.error.message) {
+            if (err.error?.message) {
               this.messageService.add({key: 'gt', summary: 'Error', severity: 'error', detail: err.error?.message});
             } else {
               this.messageService.add({

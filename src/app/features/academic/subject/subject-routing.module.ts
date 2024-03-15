@@ -1,23 +1,32 @@
 import {NgModule} from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {ViewSubjectComponent} from './view-subject/view-subject.component';
-import {CreateSubjectComponent} from './create-subject/create-subject.component';
+import {ViewSubjectDetailComponent} from "./view-subject-detail/view-subject-detail.component";
+import {ViewClassGroupDetailComponent} from "../class-group/view-class-group-detail/view-class-group-detail.component";
 
-const routes = [
+const routes: Routes = [
   {
     path: '',
     component: ViewSubjectComponent,
     data: {
       breadcrumb: 'Asignaturas'
-    }
+    },
   },
   {
-    path: ':subjectId',
-    component: CreateSubjectComponent,
+    path: ':subjectId/groups',
+    component: ViewSubjectDetailComponent,
     data: {
-      breadcrumb: 'Gestionar Asignatura'
-    }
+      breadcrumb: 'Grupos de Asignatura'
+    },
+  },
+  {
+    path: ':subjectId/groups/:groupId',
+    component: ViewClassGroupDetailComponent,
+    data: {
+      breadcrumb: 'Grupos de Asignatura'
+    },
   }
+
 ];
 
 

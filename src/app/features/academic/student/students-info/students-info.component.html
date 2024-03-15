@@ -44,7 +44,6 @@
     'lastName',
     'secondLastName'
   ]"
-    [(selection)]="selectedStudents"
     [paginator]="true"
     [rowsPerPageOptions]="[10, 25, 50]"
     [rows]="10"
@@ -56,6 +55,7 @@
     exportFilename="Estudiantes"
     responsiveLayout="scroll"
     styleClass="p-datatable-gridlines"
+    
 >
     <div class="row">
         <ng-template pTemplate="caption">

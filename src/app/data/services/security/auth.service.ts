@@ -22,7 +22,7 @@ export class AuthService extends BaseService {
   public login(username: string, password: string): Observable<Response<any>> {
     return this.http.post<any>(`${this.securityBaseUrl}/Auth/Authenticate`, {username, password})
       .pipe(map(user => {
-        this.router.navigate(["/home"]).then(_ => console.trace());
+        this.router.navigate(["/home"]).then(r => console.log(r));
         sessionStorage.setItem('currentSession', JSON.stringify(user.data));
         this.currentUserSubject.next(user.data);
         return user;
@@ -31,7 +31,7 @@ export class AuthService extends BaseService {
 
   public logout(): void {
     sessionStorage.removeItem('currentSession');
-    this.router.navigate([""]).then(_ => console.trace());
+    this.router.navigate([""]).then(r => console.log(r));
     this.currentUserSubject.next(null!);
   }
 
