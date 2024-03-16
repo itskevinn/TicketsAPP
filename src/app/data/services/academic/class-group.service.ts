@@ -28,6 +28,13 @@ export class ClassGroupService {
       }));
   }
 
+  public getById(classGroupId: string): Observable<Response<ClassGroup>> {
+    return this.http.get<Response<ClassGroup>>(`${this.baseUrl}/ClassGroup/GetById/${classGroupId}`)
+      .pipe(catchError(err => {
+        throw err;
+      }));
+  }
+
   public update(classGroup: ClassGroup): Observable<Response<ClassGroup>> {
     return this.http.put<Response<ClassGroup>>(`${this.baseUrl}/ClassGroup/Update`, classGroup)
       .pipe(catchError(err => {

@@ -7,24 +7,26 @@ import {SharedModule} from "../../../shared/shared.module";
 import {DynamicDialogRef} from "primeng/dynamicdialog";
 import {SubjectRoutingModule} from "./subject-routing.module";
 import {CreateSubjectComponent} from "./create-subject/create-subject.component";
-import {ClassGroupModule} from "../class-group/class-group.module";
-import {StudentModule} from "../student/student.module";
 import {ViewSubjectDetailComponent} from "./view-subject-detail/view-subject-detail.component";
 import {FileUploadModule} from "primeng/fileupload";
+import {ViewClassGroupDetailComponent} from "./view-class-group-detail/view-class-group-detail.component";
+import {CreateClassGroupComponent} from "./create-class-group/create-class-group.component";
+import {StudentModule} from "../student/student.module";
 
 @NgModule({
   declarations: [
     ViewSubjectComponent,
     CreateSubjectComponent,
-    ViewSubjectDetailComponent
+    ViewSubjectDetailComponent,
+    ViewClassGroupDetailComponent,
+    CreateClassGroupComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    ClassGroupModule,
+    FileUploadModule,
     SubjectRoutingModule,
     StudentModule,
-    FileUploadModule
   ],
   providers: [ConfirmationService, MessageService, DynamicDialogRef]
 })

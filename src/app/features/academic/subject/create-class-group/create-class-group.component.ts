@@ -45,8 +45,8 @@ export class CreateClassGroupComponent implements OnInit {
 
   private buildClassGroupForm(): FormGroup {
     return this.formBuilder.group({
-      id: [],
       name: ['', Validators.required],
+      code: ['', Validators.required],
       description: [''],
       subjectId: [this.subjectId]
     });
@@ -72,7 +72,7 @@ export class CreateClassGroupComponent implements OnInit {
     classGroup = this.classGroupFrom.value;
     if (this.selectedTeacher)
       classGroup.teacherId = this.selectedTeacher.id;
-    
+
     this.ref.close(classGroup);
   }
 
@@ -80,7 +80,6 @@ export class CreateClassGroupComponent implements OnInit {
     this.classGroupService
       .update(classGroup)
       .subscribe((r) => {
-        console.log(r);
         this.messageService.handleResponse(r);
       });
   }

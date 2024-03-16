@@ -21,9 +21,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
   ref: DynamicDialogRef | undefined;
   @Input() showToolBar: boolean = true;
   @Input() showRowSelection: boolean = false;
-  @Input() classGroupId: string | undefined;
-  @Input() selectedStudents: Student[] = [];
-  @Output() selectedStudentsOutput: EventEmitter<Student[]> = new EventEmitter<Student[]>();
+  @Input() defaultStudents: Student[] | undefined;
 
   constructor(
     private studentService: StudentService,
@@ -35,6 +33,10 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    if (this.defaultStudents !== undefined) {
+      this.students = this.defaultStudents;
+      return;
+    }
     this.getStudents();
   }
 
@@ -47,8 +49,7 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
           return;
         }
         this.students = r.data;
-        console.log(r);
-        
+
       });
   }
 
@@ -130,6 +131,5 @@ export class StudentsInfoComponent implements OnInit, OnDestroy {
     }
     this.destroy$.next();
     this.destroy$.complete();
-    this.selectedStudentsOutput.emit(this.selectedStudents);
   }
 }

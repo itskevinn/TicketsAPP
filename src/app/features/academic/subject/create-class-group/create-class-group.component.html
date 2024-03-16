@@ -1,0 +1,42 @@
+<div class="row" [formGroup]="classGroupFrom">
+    <div class="col-12 my-1">
+        <p-dropdown [options]="teachers" [(ngModel)]="selectedTeacher"
+                    emptyMessage="No se encontraron profesores" placeholder="Selecciona un profesor"
+                    optionLabel="firstName"
+                    [ngModelOptions]="{standalone: true}"></p-dropdown>
+    </div>
+    <div class="col-6 my-1">
+        <input
+                class="w-100"
+                type="text"
+                pInputText
+                placeholder="Nombre"
+                formControlName="name"
+        />
+    </div>
+    <div class="col-6 my-1">
+        <input
+                class="w-100"
+                type="text"
+                pInputText
+                placeholder="Código"
+                formControlName="code"
+        />
+    </div>
+    <div class="col-12 my-1">
+      <textarea
+              class="w-100"
+              type="text"
+              pInputTextarea
+              placeholder="Descripción"
+              formControlName="description"></textarea>
+    </div>
+</div>
+
+<div class="d-flex justify-content-end">
+    <app-dialog-confirm-footer
+            [cancelLabel]="'Cancelar'"
+            [confirmLabel]="dialogInstance?.data.action"
+            (result)="confirm($event)"
+    ></app-dialog-confirm-footer>
+</div>

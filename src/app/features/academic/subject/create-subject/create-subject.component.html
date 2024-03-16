@@ -4,14 +4,42 @@
     </div>
 </div>
 <div [formGroup]="subjectFormGroup">
-    <div class="row my-3">
+    <div class="row my-1">
+        <div class="col-6">
+            <input
+                    class="w-100"
+                    type="text"
+                    pInputText
+                    placeholder="Nombre"
+                    formControlName="firstName"
+            />
+        </div>
+        <div class="col-6">
+            <input
+                    class="w-100"
+                    type="text"
+                    pInputText
+                    placeholder="Código"
+                    formControlName="code"
+            />
+        </div>
+    </div>
+    <div class="row my-1">
         <div class="col-12">
-            <input class="input-borderless w-100" type="text" pInputText formControlName="name"
-                   placeholder="Nombre de Asignatura"/>
+            <textarea
+                    class="w-100"
+                    type="text"
+                    pInputTextarea
+                    placeholder="Descripción"
+                    formControlName="descripcion"></textarea>
         </div>
     </div>
 </div>
-<div class="row card-body justify-content-between">
-
+<div class="d-flex justify-content-end">
+    <app-dialog-confirm-footer
+            [cancelLabel]="'Cancelar'"
+            [confirmLabel]="dialogInstance?.data.action"
+            (result)="confirm($event)"
+    ></app-dialog-confirm-footer>
 </div>
 

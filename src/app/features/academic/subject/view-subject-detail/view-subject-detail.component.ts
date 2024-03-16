@@ -3,9 +3,9 @@ import {AcademicSubject} from "../../../../data/models/academic/academic-subject
 import {SubjectService} from "../../../../data/services/academic/subject.service";
 import {ActivatedRoute} from "@angular/router";
 import {ClassGroup} from "../../../../data/models/academic/class-group";
-import {CreateClassGroupComponent} from "../../class-group/create-class-group/create-class-group.component";
+import {CreateClassGroupComponent} from "../create-class-group/create-class-group.component";
 import {Subject, takeUntil} from "rxjs";
-import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DialogService} from "primeng/dynamicdialog";
 import {CREATE, UPDATE} from "../../../../core/constants/actions";
 import {DataView} from "primeng/dataview";
 
@@ -16,19 +16,17 @@ import {DataView} from "primeng/dataview";
 })
 export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
   subjectId: string = "";
-  subject: AcademicSubject | undefined;
   classGroups: ClassGroup[] = [];
+  subject: AcademicSubject | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
   constructor(private subjectService: SubjectService,
               private activatedRoute: ActivatedRoute,
-              private dialogService: DialogService,
-              private ref: DynamicDialogRef) {
+              private dialogService: DialogService) {
 
   }
 
   ngOnInit(): void {
-
     this.findSubjectBySubjectId();
   }
 
@@ -51,7 +49,7 @@ export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
     if (classGroup && action == UPDATE)
       classGroup.subjectId = this.subjectId;
 
-    this.ref = this.dialogService.open(CreateClassGroupComponent, {
+    this.dialogService.open(CreateClassGroupComponent, {
       header: `${action} grupo de clases`,
       width: '40vw',
       contentStyle: {overflow: 'auto'},
