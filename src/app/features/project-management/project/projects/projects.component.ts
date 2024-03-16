@@ -2,11 +2,12 @@ import {Component} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
 import {DialogService} from "primeng/dynamicdialog";
 import {DataView} from "primeng/dataview";
-import {ProjectService} from "../../../data/services/project-management/project.service";
-import {CREATE, UPDATE} from "../../../core/constants/actions";
-import {Project} from "../../../data/models/projects-management/project.model";
+import {ProjectService} from "../../../../data/services/project-management/project.service";
+import {CREATE, UPDATE} from "../../../../core/constants/actions";
+import {Project} from "../../../../data/models/projects-management/project.model";
 import {CreateModifyProjectComponent} from "../create-modify-project/create-modify-project.component";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AuthService} from "../../../../data/services/security/auth.service";
+import {User} from "../../../../data/models/security/user.model";
 
 @Component({
   selector: 'app-projects',
@@ -14,7 +15,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
   styleUrl: './projects.component.scss'
 })
 export class ProjectsComponent {
-  project!: Project;
   action: string = '';
   sortOrder: number = 0;
   sortField: string = '';
@@ -22,7 +22,9 @@ export class ProjectsComponent {
   projects: Project[] = [];
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private projectService: ProjectService, public dialogService: DialogService
+  constructor(private projectService: ProjectService,
+              public dialogService: DialogService,
+              private authService: AuthService
   ) {
   }
 
@@ -32,7 +34,8 @@ export class ProjectsComponent {
 
 
   private getAll() {
-    this.projectService.getAll().pipe(takeUntil(this.destroy$)).subscribe(r => {
+    let loggedUser: User = this.authService.loggedUser;
+    this.projectService.getAllByUserId(loggedUser.id).pipe(takeUntil(this.destroy$)).subscribe(r => {
       if (!r.success) {
         return;
       }

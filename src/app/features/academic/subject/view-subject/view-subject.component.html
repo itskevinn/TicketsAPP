@@ -3,7 +3,7 @@
     #dv
     [value]="subjects"
     [paginator]="true"
-    [rows]="9"
+    [rows]="10"
     filterBy="name"
     [sortField]="sortField"
     [sortOrder]="sortOrder"
@@ -39,7 +39,7 @@
                 <div class="data-view-card" (dblclick)="openCreateModifySubjectDialog(UPDATE, subject)">
                     <div
                             class="card m-3 border-1 surface-border"
-                            [routerLink]="[subject.id, 'groups']"
+                            [routerLink]="[subject.code, 'groups']"
                     >
                         <div class="flex flex-column align-items-center text-center">
                             <div class="text-2xl font-bold">{{ subject.name }}</div>

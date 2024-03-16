@@ -30,24 +30,25 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
               private dialogService: DialogService,
               private messageService: CustomMessageService
   ) {
-    this.getSubjectCode();
     this.subjectFormGroup = this.buildSubjectGroupForm();
     this.dialogInstance = this.dialogService.getInstance(this.ref);
   }
 
   ngOnInit(): void {
+    this.getSubjectCode();
     if (this.subjectCode && this.subjectCode !== 'new') this.getSubjectInfo(this.subjectCode);
   }
 
   private buildSubjectGroupForm(): FormGroup {
     return this.formBuilder.group({
       name: ['', Validators.required],
-      code: ['', Validators.required]
+      code: ['', Validators.required],
+      description: ['']
     });
   }
 
   private getSubjectCode(): void {
-    this.subjectCode = this.dialogInstance?.data.code;
+    this.subjectCode = this.dialogInstance?.data.subjectCode;
   }
 
 
@@ -63,7 +64,8 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
 
   public confirm(result: any): void {
     if (!result) {
-      this.ref.close();
+      this.ref.close(false);
+      return;
     }
     let academicSubject: AcademicSubject;
     if (this.subjectFormGroup.invalid) {
@@ -73,8 +75,8 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
     academicSubject = this.subjectFormGroup.value;
     this.subjectService.save(academicSubject).pipe(takeUntil(this.destroy$))
       .subscribe(r => {
-        if (!r.success) return;
         this.messageService.handleResponse(r, true);
+        if (r.success) this.ref.close(true);
       });
   }
 

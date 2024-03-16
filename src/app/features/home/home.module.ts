@@ -5,7 +5,6 @@ import {SharedModule} from "../../shared/shared.module";
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {HomeComponent} from "./home/home.component";
-import {KanbanBoardModule} from "../tickets/kanban-board.module";
 
 const components = [MatToolbarModule, MatIconModule];
 
@@ -13,11 +12,10 @@ const components = [MatToolbarModule, MatIconModule];
     declarations: [
         HomeComponent,
     ],
-    imports: [
-        SharedModule,
-        HomeRoutingModule,
-        KanbanBoardModule
-    ],
+  imports: [
+    SharedModule,
+    HomeRoutingModule,
+  ],
     exports: components
 })
 export class HomeModule {

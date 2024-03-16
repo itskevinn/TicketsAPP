@@ -29,6 +29,10 @@ export class AuthService extends BaseService {
       }));
   }
 
+  public get loggedUser(): User {
+    return JSON.parse(sessionStorage.getItem('currentSession')!);
+  }
+
   public logout(): void {
     sessionStorage.removeItem('currentSession');
     this.router.navigate([""]).then(r => console.log(r));

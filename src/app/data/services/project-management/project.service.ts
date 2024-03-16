@@ -15,8 +15,8 @@ export class ProjectService {
   constructor(private http: HttpClient) {
   }
 
-  public getAll(): Observable<Response<Project[]>> {
-    return this.http.get<Response<Project[]>>(`${this.baseUrl}/Project/GetAll`)
+  public getAllByUserId(userId: string): Observable<Response<Project[]>> {
+    return this.http.get<Response<Project[]>>(`${this.baseUrl}/Project/AllByUserId/${userId}`)
       .pipe(catchError(err => {
         throw err;
       }))

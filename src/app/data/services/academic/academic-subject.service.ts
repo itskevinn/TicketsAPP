@@ -29,7 +29,7 @@ export class AcademicSubjectService {
   }
 
   public getByCode(subjectCode: string): Observable<Response<AcademicSubject>> {
-    return this.http.get<Response<AcademicSubject>>(`${this.baseUrl}/Subject/GetById/${subjectCode}`)
+    return this.http.get<Response<AcademicSubject>>(`${this.baseUrl}/Subject/GetByCode/${subjectCode}`)
       .pipe(catchError(err => {
         throw err;
       }));

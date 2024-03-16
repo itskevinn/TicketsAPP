@@ -45,7 +45,7 @@ export class ViewSubjectComponent implements OnInit, OnDestroy {
   }
 
   public openCreateModifySubjectDialog(action: string, subject?: AcademicSubject) {
-    this.dialogService.open(CreateSubjectComponent, {
+    this.ref = this.dialogService.open(CreateSubjectComponent, {
       header: `${action} asignatura`,
       width: '40vw',
       contentStyle: {overflow: 'auto'},
@@ -58,7 +58,11 @@ export class ViewSubjectComponent implements OnInit, OnDestroy {
         subject: subject,
         subjectCode: subject?.code
       },
-    })
+    });
+
+    this.ref?.onClose.pipe(takeUntil(this.destroy$)).subscribe((response: any) => {
+      if (response) this.getAll();
+    });
   }
 
   ngOnDestroy() {

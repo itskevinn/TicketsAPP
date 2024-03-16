@@ -1,18 +1,18 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TeacherService} from "../../../data/services/academic/teacher.service";
-import {ProjectService} from "../../../data/services/project-management/project.service";
-import {CustomMessageService} from "../../../core/service/custom-message.service";
-import {Teacher} from "../../../data/models/academic/teacher";
-import {Project} from "../../../data/models/projects-management/project.model";
+import {TeacherService} from "../../../../data/services/academic/teacher.service";
+import {ProjectService} from "../../../../data/services/project-management/project.service";
+import {CustomMessageService} from "../../../../core/service/custom-message.service";
+import {Teacher} from "../../../../data/models/academic/teacher";
+import {Project} from "../../../../data/models/projects-management/project.model";
 import {Subject, take, takeUntil} from "rxjs";
-import {ProjectStatus} from "../../../data/models/projects-management/project-status.model";
-import {ClassGroup} from "../../../data/models/academic/class-group";
-import {ClassGroupService} from "../../../data/services/academic/class-group.service";
-import {AcademicSubjectService} from "../../../data/services/academic/academic-subject.service";
-import {AcademicSubject} from "../../../data/models/academic/academic-subject";
+import {ProjectStatus} from "../../../../data/models/projects-management/project-status.model";
+import {ClassGroup} from "../../../../data/models/academic/class-group";
+import {ClassGroupService} from "../../../../data/services/academic/class-group.service";
+import {AcademicSubjectService} from "../../../../data/services/academic/academic-subject.service";
+import {AcademicSubject} from "../../../../data/models/academic/academic-subject";
 import {DialogService, DynamicDialogComponent, DynamicDialogRef} from "primeng/dynamicdialog";
-import {markFormControlsAsTouched} from "../../../shared/functions/functions";
+import {markFormControlsAsTouched} from "../../../../shared/functions/functions";
 
 @Component({
   selector: 'app-create-modify-project',

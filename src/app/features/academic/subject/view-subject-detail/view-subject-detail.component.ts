@@ -5,8 +5,8 @@ import {ActivatedRoute} from "@angular/router";
 import {ClassGroup} from "../../../../data/models/academic/class-group";
 import {CreateClassGroupComponent} from "../create-class-group/create-class-group.component";
 import {Subject, takeUntil} from "rxjs";
-import {DialogService} from "primeng/dynamicdialog";
-import {CREATE} from "../../../../core/constants/actions";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {CREATE, UPDATE} from "../../../../core/constants/actions";
 import {DataView} from "primeng/dataview";
 
 @Component({
@@ -17,6 +17,7 @@ import {DataView} from "primeng/dataview";
 export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
   subjectCode: string = "";
   classGroups: ClassGroup[] = [];
+  ref: DynamicDialogRef | undefined;
   subject: AcademicSubject | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
@@ -46,7 +47,8 @@ export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
   }
 
   public openCreateModifyClassGroupDialog(action: string, classGroup?: ClassGroup): void {
-    this.dialogService.open(CreateClassGroupComponent, {
+
+    this.ref = this.dialogService.open(CreateClassGroupComponent, {
       header: `${action} grupo de clases`,
       width: '40vw',
       contentStyle: {overflow: 'auto'},
@@ -56,9 +58,14 @@ export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
       },
       data: {
         action: action,
-        subjectCode: this.subjectCode,
-        classGroup: classGroup
+        classGroup: classGroup,
+        subjectId: this.subject?.id
       },
+    });
+
+    this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      if (!data) return;
+      this.findSubjectBySubjectCode();
     });
   }
 

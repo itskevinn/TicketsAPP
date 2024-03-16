@@ -1,0 +1,11 @@
+<div class="list" id="list_{{ ticketList?.id }}" cdkDropList [cdkDropListData]="ticketList?.tickets"
+     (cdkDropListDropped)="drop($event)">
+    <h3 class="list__title">
+        <strong>{{ ticketList?.name }}</strong>
+    </h3>
+    <div class="list__tasks">
+        <app-ticket *ngFor="let ticket of ticketList?.tickets" [ticket]="ticket" [list]="ticketList"
+                    (editTicket)="handleEdit(ticket)"
+                    cdkDrag></app-ticket>
+    </div>
+</div>

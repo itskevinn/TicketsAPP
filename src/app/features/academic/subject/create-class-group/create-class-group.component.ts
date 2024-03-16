@@ -75,15 +75,15 @@ export class CreateClassGroupComponent implements OnInit {
       return;
     }
     classGroup = this.classGroupFrom.value;
-    
+    classGroup.subjectId = this.subjectId;
     if (this.selectedTeacher) {
       classGroup.teacherId = this.selectedTeacher.id;
     }
 
     this.classGroupService.save(classGroup).pipe(takeUntil(this.destroy$))
       .subscribe(r => {
-        if (!r.success) return;
         this.messageService.handleResponse(r, true);
+        if (r.success) this.ref.close(true);
       });
   }
 
