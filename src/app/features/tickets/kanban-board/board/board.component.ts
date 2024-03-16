@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { List } from "../../../../data/models/ticket/list";
-import { TicketService } from "../../../../data/services/ticket/ticket.service";
+import { TicketList } from "../../../../data/models/projects-management/ticketList";
+import { TicketService } from "../../../../data/services/project-management/ticket.service";
 import { ActivatedRoute } from "@angular/router";
 import { catchError, map, Subscription } from "rxjs";
 
@@ -10,7 +10,7 @@ import { catchError, map, Subscription } from "rxjs";
     styleUrl: './board.component.scss'
 })
 export class BoardComponent {
-    lists: List[] = [];
+    lists: TicketList[] = [];
     id: string | null = '';
     subscription: Subscription[] = [];
 

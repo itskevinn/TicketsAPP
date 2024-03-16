@@ -13,14 +13,14 @@ const routes: Routes = [
     },
   },
   {
-    path: ':subjectId/groups',
+    path: ':subjectCode/groups',
     component: ViewSubjectDetailComponent,
     data: {
       breadcrumb: 'Grupos de Asignatura'
     },
   },
   {
-    path: ':subjectId/groups/:groupId',
+    path: ':subjectCode/groups/:groupCode',
     component: ViewClassGroupDetailComponent,
     data: {
       breadcrumb: 'Grupos de Asignatura'

@@ -1,19 +1,19 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {TicketService} from 'src/app/data/services/ticket/ticket.service';
+import {TicketService} from 'src/app/data/services/project-management/ticket.service';
 import {MatDialog} from "@angular/material/dialog";
-import {Ticket} from "../../../../data/models/ticket/ticket";
+import {Ticket} from "../../../../data/models/projects-management/ticket";
 import {tick} from "@angular/core/testing";
-import {List} from "../../../../data/models/ticket/list";
+import {TicketList} from "../../../../data/models/projects-management/ticketList";
 
 @Component({
-    selector: 'app-ticket',
+    selector: 'app-projects-management',
     templateUrl: './ticket.component.html',
-    styleUrl: './ticket.component.scss'
+    styleUrl: './projects-management.component.scss'
 })
 export class TicketComponent {
     @Input() ticket!: Ticket;
     @Output() editTicket: EventEmitter<Ticket> = new EventEmitter();
-    @Input() list?: List;
+    @Input() list?: TicketList;
     priorityStyle = "";
 
     constructor(public dialog: MatDialog, public ticketService: TicketService) {
@@ -28,7 +28,7 @@ export class TicketComponent {
     }
 
     removeTask(taskId: string): void {
-        //TODO: método para eliminar ticket
+        //TODO: método para eliminar projects-management
     }
 
     protected readonly tick = tick;

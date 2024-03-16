@@ -1,8 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AcademicSubject} from '../../../../data/models/academic/academic-subject';
-import {SubjectService} from '../../../../data/services/academic/subject.service';
+import {AcademicSubjectService} from '../../../../data/services/academic/academic-subject.service';
 import {Subject, takeUntil} from "rxjs";
 import {DataView} from 'primeng/dataview';
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {CreateSubjectComponent} from "../create-subject/create-subject.component";
+import {CREATE, UPDATE} from "../../../../core/constants/actions";
 
 
 @Component({
@@ -11,13 +14,16 @@ import {DataView} from 'primeng/dataview';
   styleUrl: './view-subject.component.scss'
 })
 export class ViewSubjectComponent implements OnInit, OnDestroy {
-  subjects!: AcademicSubject[];
+  subjects: AcademicSubject[] = [];
   position: string = 'top';
   sortField: string = '';
   sortOrder: number = 0;
+  subject!: AcademicSubject;
   private destroy$: Subject<void> = new Subject<void>();
+  ref: DynamicDialogRef | undefined;
+  action: string = '';
 
-  constructor(private subjectService: SubjectService
+  constructor(private subjectService: AcademicSubjectService, public dialogService: DialogService
   ) {
   }
 
@@ -38,8 +44,28 @@ export class ViewSubjectComponent implements OnInit, OnDestroy {
     dv.filter((event.target as HTMLInputElement).value);
   }
 
+  public openCreateModifySubjectDialog(action: string, subject?: AcademicSubject) {
+    this.dialogService.open(CreateSubjectComponent, {
+      header: `${action} asignatura`,
+      width: '40vw',
+      contentStyle: {overflow: 'auto'},
+      breakpoints: {
+        '960px': '75vw',
+        '640px': '90vw',
+      },
+      data: {
+        action: action,
+        subject: subject,
+        subjectCode: subject?.code
+      },
+    })
+  }
+
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  protected readonly CREATE = CREATE;
+  protected readonly UPDATE = UPDATE;
 }

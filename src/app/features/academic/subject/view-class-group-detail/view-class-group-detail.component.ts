@@ -25,7 +25,7 @@ export class ViewClassGroupDetailComponent implements OnInit, OnDestroy {
 
   private findClassGroupById() {
     this.activatedRoute.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      this.classGroupId = params['subjectId'] || null;
+      this.classGroupId = params['groupCode'] || null;
     });
     this.classGroupService.getById(this.classGroupId).pipe(takeUntil(this.destroy$)).subscribe(r => {
       console.log(r.data)

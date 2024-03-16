@@ -4,10 +4,11 @@ import {DialogService, DynamicDialogComponent, DynamicDialogRef} from "primeng/d
 import {Subject, takeUntil} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {SubjectService} from "../../../../data/services/academic/subject.service";
+import {AcademicSubjectService} from "../../../../data/services/academic/academic-subject.service";
 import {markFormControlsAsTouched, setFormValues} from "../../../../shared/functions/functions";
 import {CREATE, UPDATE} from "../../../../core/constants/actions";
 import {AcademicSubject} from "../../../../data/models/academic/academic-subject";
+import {CustomMessageService} from "../../../../core/service/custom-message.service";
 
 @Component({
   selector: 'app-create-subject',
@@ -25,11 +26,11 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
 
   constructor(private ref: DynamicDialogRef,
               private formBuilder: FormBuilder,
-              private activatedRoute: ActivatedRoute,
-              private subjectService: SubjectService,
-              private dialogService: DialogService
+              private subjectService: AcademicSubjectService,
+              private dialogService: DialogService,
+              private messageService: CustomMessageService
   ) {
-    this.validateRouteParam();
+    this.getSubjectCode();
     this.subjectFormGroup = this.buildSubjectGroupForm();
     this.dialogInstance = this.dialogService.getInstance(this.ref);
   }
@@ -45,16 +46,14 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  private validateRouteParam(): void {
-    this.activatedRoute.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      this.subjectCode = params['subjectId'] || null;
-    });
+  private getSubjectCode(): void {
+    this.subjectCode = this.dialogInstance?.data.code;
   }
 
 
   private getSubjectInfo(subjectId: string): void {
     this.action = UPDATE;
-    this.subjectService.getById(subjectId).pipe(takeUntil(this.destroy$)).subscribe(r => {
+    this.subjectService.getByCode(subjectId).pipe(takeUntil(this.destroy$)).subscribe(r => {
       if (!r.success) return;
 
       setFormValues(this.subjectFormGroup, r.data)
@@ -72,7 +71,11 @@ export class CreateSubjectComponent implements OnInit, OnDestroy {
       return;
     }
     academicSubject = this.subjectFormGroup.value;
-    this.ref.close(academicSubject);
+    this.subjectService.save(academicSubject).pipe(takeUntil(this.destroy$))
+      .subscribe(r => {
+        if (!r.success) return;
+        this.messageService.handleResponse(r, true);
+      });
   }
 
   ngOnDestroy() {

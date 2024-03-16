@@ -1,6 +1,6 @@
 import {Ticket} from "./ticket";
 
-export interface List {
+export interface TicketList {
     id: string;
     name: string;
     tickets: Ticket[];

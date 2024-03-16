@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from "@angular/cdk/drag-drop";
-import { List } from "../../../../data/models/ticket/list";
-import { TicketService } from 'src/app/data/services/ticket/ticket.service';
-import {Ticket} from "../../../../data/models/ticket/ticket";
+import { TicketList } from "../../../../data/models/projects-management/ticketList";
+import { TicketService } from 'src/app/data/services/project-management/ticket.service';
+import {Ticket} from "../../../../data/models/projects-management/ticket";
 
 @Component({
     selector: 'app-list',
@@ -10,7 +10,7 @@ import {Ticket} from "../../../../data/models/ticket/ticket";
     styleUrl: './list.component.scss'
 })
 export class ListComponent {
-    @Input() list: List | undefined;
+    @Input() list: TicketList | undefined;
     @Output() editTask: EventEmitter<Ticket> = new EventEmitter();
 
     constructor(public tasksService: TicketService) { }

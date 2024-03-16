@@ -9,4 +9,5 @@ export interface ClassGroup {
   teacherId: string;
   students: Student[];
   subjectId: string;
+  id: string;
 }

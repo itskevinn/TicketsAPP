@@ -1,12 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AcademicSubject} from "../../../../data/models/academic/academic-subject";
-import {SubjectService} from "../../../../data/services/academic/subject.service";
+import {AcademicSubjectService} from "../../../../data/services/academic/academic-subject.service";
 import {ActivatedRoute} from "@angular/router";
 import {ClassGroup} from "../../../../data/models/academic/class-group";
 import {CreateClassGroupComponent} from "../create-class-group/create-class-group.component";
 import {Subject, takeUntil} from "rxjs";
 import {DialogService} from "primeng/dynamicdialog";
-import {CREATE, UPDATE} from "../../../../core/constants/actions";
+import {CREATE} from "../../../../core/constants/actions";
 import {DataView} from "primeng/dataview";
 
 @Component({
@@ -15,40 +15,37 @@ import {DataView} from "primeng/dataview";
   styleUrl: './view-subject-detail.component.scss'
 })
 export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
-  subjectId: string = "";
+  subjectCode: string = "";
   classGroups: ClassGroup[] = [];
   subject: AcademicSubject | undefined;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor(private subjectService: SubjectService,
+  constructor(private subjectService: AcademicSubjectService,
               private activatedRoute: ActivatedRoute,
               private dialogService: DialogService) {
 
   }
 
   ngOnInit(): void {
-    this.findSubjectBySubjectId();
+    this.findSubjectBySubjectCode();
   }
 
   public onFilter(dv: DataView, event: Event): void {
     dv.filter((event.target as HTMLInputElement).value);
   }
 
-  private findSubjectBySubjectId() {
+  private findSubjectBySubjectCode() {
     this.activatedRoute.params.pipe(takeUntil(this.destroy$)).subscribe(params => {
-      this.subjectId = params['subjectId'] || null;
+      this.subjectCode = params['subjectCode'] || null;
     });
-    this.subjectService.getById(this.subjectId).pipe(takeUntil(this.destroy$)).subscribe(r => {
+    this.subjectService.getByCode(this.subjectCode).pipe(takeUntil(this.destroy$)).subscribe(r => {
       if (!r.success) return;
       this.subject = r.data;
       this.classGroups = r.data.classGroup;
     });
   }
 
-  public showClassGroupDialog(action: string, classGroup?: ClassGroup): void {
-    if (classGroup && action == UPDATE)
-      classGroup.subjectId = this.subjectId;
-
+  public openCreateModifyClassGroupDialog(action: string, classGroup?: ClassGroup): void {
     this.dialogService.open(CreateClassGroupComponent, {
       header: `${action} grupo de clases`,
       width: '40vw',
@@ -59,7 +56,7 @@ export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
       },
       data: {
         action: action,
-        subjectId: this.subjectId,
+        subjectCode: this.subjectCode,
         classGroup: classGroup
       },
     });

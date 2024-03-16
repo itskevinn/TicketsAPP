@@ -30,7 +30,7 @@ const routes: Routes = [
       },
       {
         path: 'projects',
-        loadChildren: () => import('./features/proyects/proyects.module').then(m => m.ProyectsModule)
+        loadChildren: () => import('./features/projects/projects.module').then(m => m.ProjectsModule)
       }
     ]
   },

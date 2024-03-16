@@ -6,8 +6,8 @@ import {TeacherService} from "../../../../data/services/academic/teacher.service
 import {CustomMessageService} from "../../../../core/service/custom-message.service";
 import {Teacher} from "../../../../data/models/academic/teacher";
 import {ClassGroup} from "../../../../data/models/academic/class-group";
-import {UPDATE} from "../../../../core/constants/actions";
 import {ClassGroupService} from "../../../../data/services/academic/class-group.service";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-create-class-group',
@@ -19,11 +19,16 @@ export class CreateClassGroupComponent implements OnInit {
   subjectId: string = '';
   teachers: Teacher[] = [];
   public classGroupFrom: FormGroup;
+  private destroy$: Subject<void> = new Subject<void>();
   selectedTeacher: Teacher | undefined;
   dialogInstance: DynamicDialogComponent | undefined;
 
-  constructor(private formBuilder: FormBuilder, private dialogService: DialogService, private ref: DynamicDialogRef,
-              private teacherService: TeacherService, private classGroupService: ClassGroupService, private messageService: CustomMessageService) {
+  constructor(private formBuilder: FormBuilder,
+              private dialogService: DialogService,
+              private ref: DynamicDialogRef,
+              private teacherService: TeacherService,
+              private classGroupService: ClassGroupService,
+              private messageService: CustomMessageService) {
     this.dialogInstance = this.dialogService.getInstance(this.ref);
     this.classGroupFrom = this.buildClassGroupForm();
 
@@ -70,10 +75,16 @@ export class CreateClassGroupComponent implements OnInit {
       return;
     }
     classGroup = this.classGroupFrom.value;
-    if (this.selectedTeacher)
+    
+    if (this.selectedTeacher) {
       classGroup.teacherId = this.selectedTeacher.id;
+    }
 
-    this.ref.close(classGroup);
+    this.classGroupService.save(classGroup).pipe(takeUntil(this.destroy$))
+      .subscribe(r => {
+        if (!r.success) return;
+        this.messageService.handleResponse(r, true);
+      });
   }
 
   private update(classGroup: ClassGroup): void {

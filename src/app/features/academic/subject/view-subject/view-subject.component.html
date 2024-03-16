@@ -18,7 +18,7 @@
                     label="Nuevo"
                     icon="pi pi-plus"
                     class="p-button-success mr-2"
-                    routerLink="new"
+                    (click)="openCreateModifySubjectDialog(CREATE)"
             ></button>
 
             <span class="p-input-icon-left w-25">
@@ -36,7 +36,7 @@
     <ng-template let-subjects pTemplate="gridItem">
         <div class="row">
             <div class="col-6 md:col-4" *ngFor="let subject of subjects">
-                <div class="data-view-card">
+                <div class="data-view-card" (dblclick)="openCreateModifySubjectDialog(UPDATE, subject)">
                     <div
                             class="card m-3 border-1 surface-border"
                             [routerLink]="[subject.id, 'groups']"

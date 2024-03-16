@@ -8,7 +8,7 @@ import {AcademicSubject} from "../../models/academic/academic-subject";
 @Injectable({
   providedIn: 'root'
 })
-export class SubjectService {
+export class AcademicSubjectService {
   private readonly baseUrl = environment.academicBaseUrlV1;
 
   constructor(private http: HttpClient) {
@@ -21,8 +21,15 @@ export class SubjectService {
       }));
   }
 
-  public getById(subjectId: string): Observable<Response<AcademicSubject>> {
-    return this.http.get<Response<AcademicSubject>>(`${this.baseUrl}/Subject/GetById/${subjectId}`)
+  public getAllByTeacher(teacherId: string): Observable<Response<AcademicSubject[]>> {
+    return this.http.get<Response<AcademicSubject[]>>(`${this.baseUrl}/Subject/GetAllByTeacher/${teacherId}`)
+      .pipe(catchError(err => {
+        throw err;
+      }));
+  }
+
+  public getByCode(subjectCode: string): Observable<Response<AcademicSubject>> {
+    return this.http.get<Response<AcademicSubject>>(`${this.baseUrl}/Subject/GetById/${subjectCode}`)
       .pipe(catchError(err => {
         throw err;
       }));
