@@ -33,7 +33,7 @@
 <div class="d-flex justify-content-end">
     <app-dialog-confirm-footer
             [cancelLabel]="'Cancelar'"
-            [confirmLabel]="dialogInstance?.data.action"
+            [confirmLabel]="dialogInstance.data.action"
             (result)="confirm($event)"
     ></app-dialog-confirm-footer>
 </div>

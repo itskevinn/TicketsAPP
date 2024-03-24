@@ -28,8 +28,8 @@ export class ClassGroupService {
       }));
   }
 
-  public getById(classGroupId: string): Observable<Response<ClassGroup>> {
-    return this.http.get<Response<ClassGroup>>(`${this.baseUrl}/ClassGroup/GetById/${classGroupId}`)
+  public getByCode(classGroupCode: string): Observable<Response<ClassGroup>> {
+    return this.http.get<Response<ClassGroup>>(`${this.baseUrl}/ClassGroup/GetByCode/${classGroupCode}`)
       .pipe(catchError(err => {
         throw err;
       }));
@@ -44,6 +44,12 @@ export class ClassGroupService {
 
   public save(classGroup: ClassGroup): Observable<Response<ClassGroup>> {
     return this.http.post<Response<ClassGroup>>(`${this.baseUrl}/ClassGroup/Create`, classGroup)
+      .pipe(catchError(err => {
+        throw err;
+      }))
+  } 
+  public addStudentsToGroup(addStudentsToGroupRequest: any): Observable<Response<ClassGroup>> {
+    return this.http.post<Response<ClassGroup>>(`${this.baseUrl}/ClassGroup/AddStudentToGroup`, addStudentsToGroupRequest)
       .pipe(catchError(err => {
         throw err;
       }))

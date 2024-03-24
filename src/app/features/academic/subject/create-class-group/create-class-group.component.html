@@ -1,19 +1,5 @@
 <div class="row" [formGroup]="classGroupFrom">
-    <div class="col-12 my-1">
-        <p-dropdown [options]="teachers" [(ngModel)]="selectedTeacher"
-                    emptyMessage="No se encontraron profesores" placeholder="Selecciona un profesor"
-                    optionLabel="fullName"
-                    [ngModelOptions]="{standalone: true}"></p-dropdown>
-    </div>
-    <div class="col-6 my-1">
-        <input
-                class="w-100"
-                type="text"
-                pInputText
-                placeholder="Nombre"
-                formControlName="name"
-        />
-    </div>
+
     <div class="col-6 my-1">
         <input
                 class="w-100"
@@ -25,7 +11,7 @@
     </div>
     <div class="col-12 my-1">
       <textarea
-              class="w-100"
+              class="w-100" 
               type="text"
               pInputTextarea
               placeholder="Descripción"

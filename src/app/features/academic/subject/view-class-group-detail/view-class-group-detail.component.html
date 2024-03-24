@@ -1,6 +1,46 @@
-<h3>Grupo {{ classGroup?.name }}</h3>
+<form [formGroup]="classGroupFormGroup">
+    <div class="row mb-3">
+        <div class="col-6">
+            <input class="input-borderless w-100" type="text" pInputText formControlName="code"
+                   placeholder="Código del Grupo"/>
+        </div>
+        <div class="col-6">
+            <p-dropdown [options]="teachers" [(ngModel)]="selectedTeacher"
+                        emptyMessage="No se encontraron profesores" placeholder="Selecciona un profesor"
+                        optionLabel="fullName"
+                        [ngModelOptions]="{standalone: true}"></p-dropdown>
+        </div>
+    </div>
+</form>
 <div class="row card-body justify-content-between">
+    <p-pickList [source]="students" [target]="selectedStudents"
+                sourceHeader="Estudiantes"
+                targetHeader="Estudiantes Seleccionados"
+                [dragdrop]="true"
+                [responsive]="true"
+                [sourceStyle]="{ height: '30rem' }"
+                [targetStyle]="{ height: '30rem' }"
+                filterBy="fullName"
+                sourceFilterPlaceholder="Buscar por nombre"
+                targetFilterPlaceholder="Buscar por nombre"
+                breakpoint="1400px">
 
-    <app-students-info [defaultStudents]="students" [showToolBar]="false" [showRowSelection]="false">
-    </app-students-info>
+        <ng-template let-student pTemplate="item">
+            <div class="flex flex-wrap p-2 align-items-center gap-3">
+                <div class="flex-1 flex flex-column gap-2">
+                    <span class="font-bold">{{ student.fullName }}</span>
+                </div>
+            </div>
+            <div class="card flex justify-content-center"></div>
+        </ng-template>
+        <ng-template let-selectedStudent pTemplate="item">
+            <div class="flex flex-wrap p-2 align-items-center gap-3">
+                <div class="flex-1 flex flex-column gap-2">
+                    <span class="font-bold">{{ selectedStudent.fullName }}</span>
+                </div>
+            </div>
+        </ng-template>
+    </p-pickList>
 </div>
+<app-dialog-confirm-footer [confirmLabel]="action" cancelLabel="Cancelar"
+                           (result)="handleConfirmAction($event)"></app-dialog-confirm-footer>

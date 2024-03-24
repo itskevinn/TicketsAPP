@@ -1,40 +1,38 @@
 <h3>Estudiantes</h3>
-<ng-container *ngIf="showToolBar">
-    <p-toolbar styleClass="mb-4">
-        <ng-template pTemplate="left">
-            <div class="my-2">
-                <button
-                        (click)="showRegisterModifyStudentDialog('Crear')"
-                        class="p-button-success mr-2"
-                        icon="pi pi-plus"
-                        label="Nuevo"
-                        pButton
-                        pRipple
-                ></button>
-            </div>
-        </ng-template>
-
-        <ng-template pTemplate="right">
-            <p-fileUpload
-                    (onUpload)="handleFile($event)"
-                    [auto]="true"
-                    [maxFileSize]="1000"
-                    accept="text/csv"
-                    chooseLabel="Importar"
-                    class="mr-1 inline-block"
-                    mode="basic"
-            ></p-fileUpload>
+<p-toolbar styleClass="mb-4">
+    <ng-template pTemplate="left">
+        <div class="my-2">
             <button
-                    (click)="studentsDt.exportCSV()"
-                    class="p-button-warning mx-1"
-                    icon="pi pi-upload"
-                    label="Exportar"
+                    (click)="showRegisterModifyStudentDialog('Crear')"
+                    class="p-button-success mr-2"
+                    icon="pi pi-plus"
+                    label="Crear estudiante"
                     pButton
                     pRipple
             ></button>
-        </ng-template>
-    </p-toolbar>
-</ng-container>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="right">
+        <p-fileUpload
+                (onUpload)="handleFile($event)"
+                [auto]="true"
+                [maxFileSize]="1000"
+                accept="text/csv"
+                chooseLabel="Importar"
+                class="mr-1 inline-block"
+                mode="basic"
+        ></p-fileUpload>
+        <button
+                (click)="studentsDt.exportCSV()"
+                class="p-button-warning mx-1"
+                icon="pi pi-upload"
+                label="Exportar"
+                pButton
+                pRipple
+        ></button>
+    </ng-template>
+</p-toolbar>
 <p-table
     #studentsDt
     [columns]="cols"
@@ -49,13 +47,12 @@
     [rows]="10"
     [showCurrentPageReport]="true"
     [value]="students"
-    [rowSelectable]="isRowSelectable"
     currentPageReportTemplate="Mostrando de {first} a {last} de {totalRecords} estudiantes"
     dataKey="id"
     exportFilename="Estudiantes"
     responsiveLayout="scroll"
     styleClass="p-datatable-gridlines"
-    
+
 >
     <div class="row">
         <ng-template pTemplate="caption">
@@ -78,9 +75,6 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th scope="col" style="width: 4rem">
-                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-            </th>
             <th pSortableColumn="firstName" scope="col">
                 Primer Nombre
                 <p-sortIcon field="code"></p-sortIcon>
@@ -106,9 +100,6 @@
     </ng-template>
     <ng-template let-student pTemplate="body">
         <tr>
-            <td>
-                <p-tableCheckbox [value]="student" [disabled]="studentExistsInGroup(student)"></p-tableCheckbox>
-            </td>
             <td>{{ student.firstName }}</td>
             <td>{{ student.middleName }}</td>
             <td>{{ student.lastName }}</td>

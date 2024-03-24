@@ -12,23 +12,29 @@ import {FileUploadModule} from "primeng/fileupload";
 import {ViewClassGroupDetailComponent} from "./view-class-group-detail/view-class-group-detail.component";
 import {CreateClassGroupComponent} from "./create-class-group/create-class-group.component";
 import {StudentModule} from "../student/student.module";
+import {PickListModule} from "primeng/picklist";
+import {PaginatorModule} from "primeng/paginator";
+import {DragDropModule} from "primeng/dragdrop";
 
 @NgModule({
-  declarations: [
-    ViewSubjectComponent,
-    CreateSubjectComponent,
-    ViewSubjectDetailComponent,
-    ViewClassGroupDetailComponent,
-    CreateClassGroupComponent
-  ],
-  imports: [
-    CommonModule,
-    SharedModule,
-    FileUploadModule,
-    SubjectRoutingModule,
-    StudentModule,
-  ],
-  providers: [ConfirmationService, MessageService, DynamicDialogRef]
+    declarations: [
+        ViewSubjectComponent,
+        CreateSubjectComponent,
+        ViewSubjectDetailComponent,
+        ViewClassGroupDetailComponent,
+        CreateClassGroupComponent
+    ],
+    imports: [
+        CommonModule,
+        SharedModule,
+        FileUploadModule,
+        SubjectRoutingModule,
+        StudentModule,
+        PickListModule,
+        PaginatorModule,
+        DragDropModule
+    ],
+    providers: [ConfirmationService, MessageService, DynamicDialogRef]
 })
 export class SubjectModule {
 }
