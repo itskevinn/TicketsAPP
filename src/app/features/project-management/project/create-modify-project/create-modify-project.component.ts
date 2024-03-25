@@ -1,18 +1,15 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {TeacherService} from "../../../../data/services/academic/teacher.service";
 import {ProjectService} from "../../../../data/services/project-management/project.service";
 import {CustomMessageService} from "../../../../core/service/custom-message.service";
-import {Teacher} from "../../../../data/models/academic/teacher";
 import {Project} from "../../../../data/models/projects-management/project.model";
-import {Subject, take, takeUntil} from "rxjs";
-import {ProjectStatus} from "../../../../data/models/projects-management/project-status.model";
+import {Subject, takeUntil} from "rxjs";
 import {ClassGroup} from "../../../../data/models/academic/class-group";
 import {ClassGroupService} from "../../../../data/services/academic/class-group.service";
 import {AcademicSubjectService} from "../../../../data/services/academic/academic-subject.service";
 import {AcademicSubject} from "../../../../data/models/academic/academic-subject";
 import {DialogService, DynamicDialogComponent, DynamicDialogRef} from "primeng/dynamicdialog";
-import {markFormControlsAsTouched} from "../../../../shared/functions/functions";
+import {markFormControlsAsDirty} from "../../../../shared/functions/functions";
 
 @Component({
   selector: 'app-create-modify-project',
@@ -21,8 +18,6 @@ import {markFormControlsAsTouched} from "../../../../shared/functions/functions"
 })
 export class CreateModifyProjectComponent implements OnInit, OnDestroy {
   public project!: Project;
-  public teachers: Teacher[] = [];
-  public selectedTeacher!: Teacher;
   public projectFormGroup: FormGroup;
   public subjects: AcademicSubject[] = [];
   public selectedSubject!: AcademicSubject;
@@ -35,7 +30,6 @@ export class CreateModifyProjectComponent implements OnInit, OnDestroy {
     private ref: DynamicDialogRef,
     private formBuilder: FormBuilder,
     private dialogService: DialogService,
-    private teacherService: TeacherService,
     private projectService: ProjectService,
     private messageService: CustomMessageService,
     private classGroupService: ClassGroupService,
@@ -45,34 +39,24 @@ export class CreateModifyProjectComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.getTeachers();
+    this.findSubjectsByUser();
+  }
 
+  private findSubjectsByUser(): void {
+    this.subjectService.getAllByUser().pipe(takeUntil(this.destroy$)).subscribe(r => {
+      this.messageService.handleResponse(r, false);
+      if (r.success) this.subjects = r.data;
+    });
   }
 
   private buildForm(): FormGroup {
     return this.formBuilder.group({
       name: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['']
     });
   }
 
-  private getTeachers(): void {
-    this.teacherService.getAll().subscribe(r => {
-      this.messageService.handleResponse(r, false);
-      this.teachers = r.data;
-    });
-  }
-
-  public getSubjectsBySelectedTeacher(teacherId: string): void {
-    this.subjectService.getAllByTeacher(teacherId)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(r => {
-        if (!r.success) return;
-        this.subjects = r.data;
-      });
-  }
-
-  public getClassGroupsBySelectedSubject(subjectId: string): void {
+  public getClassGroupsBySelectedSubject(subjectId: any): void {
     this.classGroupService.getBySubjectId(subjectId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(r => {
@@ -86,21 +70,22 @@ export class CreateModifyProjectComponent implements OnInit, OnDestroy {
       this.ref.close(false);
     }
     if (this.projectFormGroup.invalid) {
-      markFormControlsAsTouched(this.projectFormGroup);
+      markFormControlsAsDirty(this.projectFormGroup);
       return;
     }
-    if (!this.selectedTeacher) return;
     if (!this.selectedClassGroup) return;
     this.project = this.projectFormGroup.value;
-    this.project.projectManagerId = this.selectedTeacher.id;
-    this.project.classGroupId = this.selectedClassGroup.code;
+    this.project.classGroupId = this.selectedClassGroup.id;
+    console.log(this.project);
     this.projectService.save(this.project).pipe(takeUntil(this.destroy$)).subscribe(r => {
       this.messageService.handleResponse(r, true);
+      this.ref.close(true);
     });
-    this.ref.close(true);
   }
 
   ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 

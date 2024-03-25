@@ -1,52 +1,44 @@
 <div class="row" [formGroup]="projectFormGroup">
     <div class="row">
-        <div class="col-12 my-1">
-            <p-dropdown [options]="teachers" [(ngModel)]="selectedTeacher"
-                        emptyMessage="No se encontraron profesores" placeholder="Selecciona un profesor"
-                        optionLabel="fullName"
-                        [ngModelOptions]="{standalone: true}"></p-dropdown>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-6 my-1">
             <p-dropdown [options]="subjects" [(ngModel)]="selectedSubject"
-                        emptyMessage="No se encontraron asignaturas para este profesor"
+                        emptyMessage="No tienes asignaturas"
                         placeholder="Selecciona una asignatura"
-                        optionLabel="code" (onChange)="getSubjectsBySelectedTeacher($event.value.id)"
+                        optionValue="id"
+                        optionLabel="code" (onChange)="getClassGroupsBySelectedSubject($event.value)"
+                        styleClass="w-100"
                         [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
         <div class="col-6 my-1">
             <p-dropdown [options]="classGroups" [(ngModel)]="selectedClassGroup"
                         emptyMessage="No se encontraron grupos para esta asignatura" placeholder="Selecciona un grupo"
+                        optionValue="id"
                         optionLabel="code"
+                        styleClass="w-100"
                         [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
     </div>
-    <div class="col-6 my-1">
-        <input
-                class="w-100"
-                type="text"
-                pInputText
-                placeholder="Nombre"
-                formControlName="name"
-        />
+    <div class="row">
+        <div class="col-12 my-1">
+            <input
+                    class="w-100"
+                    type="text"
+                    pInputText
+                    placeholder="Nombre"
+                    formControlName="name"
+            />
+        </div>
     </div>
-    <div class="col-6 my-1">
-        <input
-                class="w-100"
-                type="text"
-                pInputText
-                placeholder="Código"
-                formControlName="code"
-        />
-    </div>
-    <div class="col-12 my-1">
+
+    <div class="row my-1">
+        <div class="col-12">
       <textarea
               class="w-100"
               type="text"
               pInputTextarea
               placeholder="Descripción"
               formControlName="description"></textarea>
+        </div>
     </div>
 </div>
 

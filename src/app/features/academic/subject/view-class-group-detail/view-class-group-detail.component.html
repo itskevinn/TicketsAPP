@@ -1,11 +1,11 @@
 <form [formGroup]="classGroupFormGroup">
-    <div class="row mb-3">
-        <div class="col-6">
+    <div class="row mb-3 align-items-center justify-content-center">
+        <div class="col-7">
             <input class="input-borderless w-100" type="text" pInputText formControlName="code"
                    placeholder="Código del Grupo"/>
         </div>
-        <div class="col-6">
-            <p-dropdown [options]="teachers" [(ngModel)]="selectedTeacher"
+        <div class="col-4">
+            <p-dropdown styleClass="w-100" [options]="teachers" [(ngModel)]="selectedTeacher"
                         emptyMessage="No se encontraron profesores" placeholder="Selecciona un profesor"
                         optionLabel="fullName"
                         [ngModelOptions]="{standalone: true}"></p-dropdown>

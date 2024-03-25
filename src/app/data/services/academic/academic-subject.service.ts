@@ -21,8 +21,8 @@ export class AcademicSubjectService {
       }));
   }
 
-  public getAllByTeacher(teacherId: string): Observable<Response<AcademicSubject[]>> {
-    return this.http.get<Response<AcademicSubject[]>>(`${this.baseUrl}/Subject/GetAllByTeacher/${teacherId}`)
+  public getAllByUser(): Observable<Response<AcademicSubject[]>> {
+    return this.http.get<Response<AcademicSubject[]>>(`${this.baseUrl}/Subject/GetAllByUser`)
       .pipe(catchError(err => {
         throw err;
       }));

@@ -2,7 +2,7 @@
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1009;
+  z-index: 99999;
   background: rgb(0 0 0 / 42%);
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@
 @keyframes custom-progress-spinner-color {
   100%,
   0% {
-    stroke: #3b82f6;
+    stroke: #4caf50;
   }
 }
 

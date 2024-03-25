@@ -5,5 +5,6 @@ export interface Person {
   lastName: string,
   secondLastName: string,
   email: string,
-  fullName: string
+  fullName: string,
+  userId: string
 }

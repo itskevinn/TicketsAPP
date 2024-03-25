@@ -44,7 +44,7 @@ export class CreateClassGroupComponent implements OnInit {
   private setDefaultValues(): void {
     if (this.dialogInstance?.data.classGroup) {
       setFormValues(this.classGroupFrom, this.dialogInstance?.data.classGroup);
-      this.selectedTeacher = this.teachers.filter(t => t.id == this.dialogInstance?.data.classGroup.teacherDto.id)[0];
+      this.selectedTeacher = this.teachers.filter(t => t.userId == this.dialogInstance?.data.classGroup.teacherDto.userId)[0];
     }
   }
 
@@ -77,7 +77,7 @@ export class CreateClassGroupComponent implements OnInit {
     classGroup = this.classGroupFrom.value;
     classGroup.subjectId = this.subjectId;
     if (this.selectedTeacher) {
-      classGroup.teacherId = this.selectedTeacher.id;
+      classGroup.teacherUserId = this.selectedTeacher.userId;
     }
 
     this.classGroupService.save(classGroup).pipe(takeUntil(this.destroy$))
@@ -87,12 +87,5 @@ export class CreateClassGroupComponent implements OnInit {
       });
   }
 
-  private update(classGroup: ClassGroup): void {
-    this.classGroupService
-      .update(classGroup)
-      .subscribe((r) => {
-        this.messageService.handleResponse(r);
-      });
-  }
 
 }

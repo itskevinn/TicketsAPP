@@ -65,7 +65,7 @@ export class CreatePersonComponent implements OnInit, OnDestroy {
 
   public confirm(result: any): void {
     if (!result) {
-      this.ref.close();
+      this.ref.close(false);
     }
     let person: Person;
     if (this.personForm.invalid) {

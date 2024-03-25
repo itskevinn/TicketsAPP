@@ -49,7 +49,7 @@ export class ViewSubjectDetailComponent implements OnInit, OnDestroy {
 
     public openCreateModifyClassGroupDialog(action: string, classGroup?: ClassGroup): void {
         this.ref = this.dialogService.open(ViewClassGroupDetailComponent, {
-            width: '40vw',
+            width: '70vw',
             contentStyle: {overflow: 'auto'},
             breakpoints: {
                 '960px': '75vw',

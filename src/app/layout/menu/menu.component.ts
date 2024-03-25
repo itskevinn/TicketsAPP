@@ -24,7 +24,6 @@ export class MenuComponent implements OnInit {
         let user = this.authService.currentUserValue;
         user?.roles?.forEach(r => {
             r.authorities?.forEach(a => {
-                console.log(a);
                 items.push(a);
             });
         });
