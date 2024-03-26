@@ -56,7 +56,7 @@ export class CreateModifyProjectComponent implements OnInit, OnDestroy {
     });
   }
 
-  public getClassGroupsBySelectedSubject(subjectId: any): void {
+  public getClassGroupsBySelectedSubject(subjectId: string): void {
     this.classGroupService.getBySubjectId(subjectId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(r => {
@@ -76,6 +76,7 @@ export class CreateModifyProjectComponent implements OnInit, OnDestroy {
     if (!this.selectedClassGroup) return;
     this.project = this.projectFormGroup.value;
     this.project.classGroupId = this.selectedClassGroup.id;
+    console.log(this.selectedClassGroup)
     console.log(this.project);
     this.projectService.save(this.project).pipe(takeUntil(this.destroy$)).subscribe(r => {
       this.messageService.handleResponse(r, true);

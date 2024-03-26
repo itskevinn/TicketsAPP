@@ -4,15 +4,13 @@
             <p-dropdown [options]="subjects" [(ngModel)]="selectedSubject"
                         emptyMessage="No tienes asignaturas"
                         placeholder="Selecciona una asignatura"
-                        optionValue="id"
-                        optionLabel="code" (onChange)="getClassGroupsBySelectedSubject($event.value)"
+                        optionLabel="code" (onChange)="getClassGroupsBySelectedSubject($event.value.id)"
                         styleClass="w-100"
                         [ngModelOptions]="{standalone: true}"></p-dropdown>
         </div>
         <div class="col-6 my-1">
             <p-dropdown [options]="classGroups" [(ngModel)]="selectedClassGroup"
                         emptyMessage="No se encontraron grupos para esta asignatura" placeholder="Selecciona un grupo"
-                        optionValue="id"
                         optionLabel="code"
                         styleClass="w-100"
                         [ngModelOptions]="{standalone: true}"></p-dropdown>
@@ -29,7 +27,14 @@
             />
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-12">
+            <p-multiSelect [options]="availableStudentsForProject" formControlName="selectedCities"
+                           defaultLabel="Select a City" optionLabel="name"
+                           display="chip">
+            </p-multiSelect>
+        </div>
+    </div>
     <div class="row my-1">
         <div class="col-12">
       <textarea
